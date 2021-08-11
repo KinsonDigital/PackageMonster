@@ -1,0 +1,12 @@
+name: 'SAMPLE-ACTION' #TODO: Set the name of the action
+description: 'Gets version information from a .csproj file.'
+inputs:
+  sample-input-name:  #TODO: Add inputs for the action
+    description: 'This is a sample input'
+    required: true
+outputs:
+  sample-output-name: #TODO: Setup the action outputs
+    description: 'This is a sample output to be used by other actions.'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
