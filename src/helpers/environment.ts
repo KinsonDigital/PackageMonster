@@ -1,6 +1,6 @@
 import {existsSync} from "fs";
-import {FileLoader} from "../fileLoader";
-import {ActionInputs} from "../interfaces/actionInputs";
+import {FileLoader} from "../FileLoader";
+import {ActionInputs} from "../interfaces/ActionInputs";
 
 /**
  * Represents the environment.
