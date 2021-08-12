@@ -1,6 +1,5 @@
 import {getInput, setOutput, info, warning, setFailed, InputOptions} from "@actions/core";
-import { context } from "@actions/github";
-import {Environment as Environment} from "./environment";
+import {Environment as Environment} from "./Environment";
 
 /**
  * Represents different action functionality.
@@ -16,9 +15,6 @@ export class Action {
      */
 	constructor () {
     	this.environment = new Environment();
-		
-
-
 	}
 
 	/**
@@ -31,7 +27,7 @@ export class Action {
 			// Development version pulls from the 'env.json' file for testing
 			let isRequired: boolean = true;
 
-			if (name === "contains") {
+			if (name === "fail-if-version-exists") {
 				isRequired = false;
 			}
 
@@ -42,7 +38,7 @@ export class Action {
 				required: true,
 			};
 
-			if (name === "contains") {
+			if (name === "fail-if-version-exists") {
 				options.required = false;
 			}
 
