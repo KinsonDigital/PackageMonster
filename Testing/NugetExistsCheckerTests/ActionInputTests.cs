@@ -24,10 +24,20 @@ public class ActionInputTests
         var inputs = new ActionInputs();
 
         // Assert
-        inputs.Message.Should().BeEmpty();
-        typeof(ActionInputs).GetProperty(nameof(ActionInputs.Message)).Should().BeDecoratedWith<OptionAttribute>();
-        inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.Message))
-            .AssertOptionAttrProps("message", true, "Prints a message to the console.");
+        inputs.PackageName.Should().BeEmpty();
+        typeof(ActionInputs).GetProperty(nameof(ActionInputs.PackageName)).Should().BeDecoratedWith<OptionAttribute>();
+        inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.PackageName))
+            .AssertOptionAttrProps("package-name", true, "The name of the package.  This is not case-sensitive.");
+
+        inputs.PackageName.Should().BeEmpty();
+        typeof(ActionInputs).GetProperty(nameof(ActionInputs.Version)).Should().BeDecoratedWith<OptionAttribute>();
+        inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.Version))
+            .AssertOptionAttrProps("version", true, "The version of the nuget package to check for.  This is not case-sensitive.");
+
+        inputs.PackageName.Should().BeEmpty();
+        typeof(ActionInputs).GetProperty(nameof(ActionInputs.FailWhenNotFound)).Should().BeDecoratedWith<OptionAttribute>();
+        inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.FailWhenNotFound))
+            .AssertOptionAttrProps("fail-when-not-found", false, "If true, will fail the workflow if the nuget package of the requested version does not exist.");
     }
     #endregion
 }

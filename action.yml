@@ -5,9 +5,16 @@ branding:
   icon: settings
   color: purple
 inputs:
-  message:
-    description: 'Prints a message to the console.'
+  package-name:
+    description: 'The name of the package.  This is not case-sensitive.'
     required: true
+  version:
+    description: 'The version of the nuget package to check for.  This is not case-sensitive.'
+    required: true
+  fail-when-not-found:
+    description: 'If true, will fail the workflow if the nuget package of the requested version does not exist.'
+    required: false
+    default: 'false'
 
 outputs:
   nuget-exists:
@@ -18,5 +25,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-  - '--message'
-  - ${{ inputs.message }}
+  - '--package-name'
+  - ${{ inputs.package-name }}
+  - '--version'
+  - ${{ inputs.version }}
+  - '--fail-when-not-found'
+  - ${{ inputs.fail-when-not-found }}
