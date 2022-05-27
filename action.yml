@@ -1,4 +1,4 @@
-name: 'Nuget Exists Checker'
+name: 'GotNuget'
 description: 'Checks if a nuget package exists in the nuget.org public repository.'
 author: 'Calvin Wilkinson (KinsonDigital)'
 branding:

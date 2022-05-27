@@ -81,7 +81,7 @@ TODO: Show examples if required
 <div align="left">
 
 ### License
-- [MIT License - NugetExistsChecker](https://github.com/KinsonDigital/NugetExistsChecker/blob/preview/v1.0.0-preview.1/LICENSE)
+- [MIT License - GotNuget](https://github.com/KinsonDigital/GotNuget/blob/preview/v1.0.0-preview.1/LICENSE)
 </div>
 
 <div align="left">
@@ -90,8 +90,8 @@ TODO: Show examples if required
 </div>
 
 - [Calvin Wilkinson](https://github.com/CalvinWilkinson) (Owner and main contributor of the GitHub organization [KinsonDigital](https://github.com/KinsonDigital))
-  - [Nuget Exists Checker](https://github.com/KinsonDigital/NugetExistsChecker) is used in various projects for this organization with great success.
-- Click [here](https://github.com/KinsonDigital/NugetExistsChecker/issues/new/choose) to report any issues for this GitHub action!!
+  - [Got Nuget](https://github.com/KinsonDigital/GotNuget) is used in various projects for this organization with great success.
+- Click [here](https://github.com/KinsonDigital/GotNuget/issues/new/choose) to report any issues for this GitHub action!!
 
 <div align="right">
 <a href="#what-is-it">Back to the top!👆🏼</a>

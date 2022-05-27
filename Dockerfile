@@ -3,17 +3,17 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 as build-env
 
 # Copy everything and publish the release (publish implicitly restores and builds)
 COPY . ./
-RUN dotnet publish ./NugetExistsChecker/NugetExistsChecker.csproj -c Release -o out --no-self-contained
+RUN dotnet publish ./GotNuget/GotNuget.csproj -c Release -o out --no-self-contained
 
 # Label the container
 LABEL maintainer="Calvin Wilkinson <kinsondigital@gmail.com>"
-LABEL repository="https://github.com/KinsonDigital/NugetExistsChecker"
-LABEL homepage="https://github.com/KinsonDigital/NugetExistsChecker"
+LABEL repository="https://github.com/KinsonDigital/GotNuget"
+LABEL homepage="https://github.com/KinsonDigital/GotNuget"
 
 # Label as GitHub action
-LABEL com.github.actions.name="Nuget Exists Checker"
+LABEL com.github.actions.name="Got Nuget"
 
 # Relayer the .NET SDK, anew with the build output
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 COPY --from=build-env /out .
-ENTRYPOINT [ "dotnet", "/NugetExistsChecker.dll" ]
+ENTRYPOINT [ "dotnet", "/GotNuget.dll" ]
