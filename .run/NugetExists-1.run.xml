@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="StandardInputs" type="DotNetProject" factoryName=".NET Project">
+  <configuration default="false" name="NugetExists (--fail-when-not-found not used)" type="DotNetProject" factoryName=".NET Project">
     <option name="EXE_PATH" value="$PROJECT_DIR$/GotNuget/bin/Debug/net6.0/GotNuget.exe" />
-    <option name="PROGRAM_PARAMETERS" value="--message Hello World" />
+    <option name="PROGRAM_PARAMETERS" value="--package-name KinsonDigital.CASL --version 1.0.0-preview.10" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GotNuget/bin/Debug/net6.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="1" />
