@@ -39,7 +39,7 @@ public class GitHubActionTests
 
         // Assert
         _mockConsoleService.VerifyOnce(m => m.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫"));
-        _mockConsoleService.VerifyOnce(m => m.BlankLine());
+        _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(2));
     }
 
     [Theory]
@@ -52,6 +52,9 @@ public class GitHubActionTests
         string expectedOutput)
     {
         // Arrange
+        var expectedSearchMsgStart = $"Searching for package '{packageName}' v{version} . . . ";
+        var expectedSearchMsgEnd = expectedOutput == "true" ? "package found!!" : "package not found!!";
+
         _mockDataService.Setup(m => m.GetNugetVersions(packageName))
             .ReturnsAsync(new[] { "1.2.3", "4.5.6" });
         var onCompletedInvoked = false;
@@ -67,8 +70,10 @@ public class GitHubActionTests
         var expectedResultMsg = $"✅The nuget package '{packageName}'";
         expectedResultMsg += $" with the version '{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
 
+        _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgStart));
+        _mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgEnd, false));
         _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
-        _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(3));
+        _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(4));
         _mockActionOutputService.VerifyOnce(m => m.SetOutputValue("nuget-exists", expectedOutput));
         onCompletedInvoked.Should().BeTrue("the 'onCompleted()' was never invoked");
     }

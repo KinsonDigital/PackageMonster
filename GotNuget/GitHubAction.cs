@@ -38,11 +38,17 @@ public sealed class GitHubAction : IGitHubAction
 
         try
         {
+            _gitHubConsoleService.WriteLine($"Searching for package '{inputs.PackageName}' v{inputs.Version} . . . ");
             var versions = await _nugetDataService.GetNugetVersions(inputs.PackageName);
 
             var versionFound = versions
                 .Any(version =>
                     string.Equals(version, inputs.Version, StringComparison.CurrentCultureIgnoreCase));
+
+            var searchEndMsg = versionFound ? "package found!!" : "package not found!!";
+
+            _gitHubConsoleService.Write(searchEndMsg);
+            _gitHubConsoleService.BlankLine();
 
             _actionOutputService.SetOutputValue("nuget-exists", versionFound.ToString().ToLower());
 
