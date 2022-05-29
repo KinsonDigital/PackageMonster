@@ -1,10 +1,11 @@
 <h1 align="center">
 
-**Version Miner Action🪨⛏️**
+**Got Nuget?🍫**
 </h1>
 
 <div align="center">
-<h3>GitHub Action for pulling out versions from XML files.</h3>
+
+### GitHub Action for checking if a nuget package exists in the public nuget gallery package repository [nuget.org](https://www.nuget.org)
 
 <div hidden>TODO: ADD BADGES HERE</div>
 
@@ -17,27 +18,57 @@
 </div>
 
 
-This is a **GitHub Action** to make it easy to pull versions from XML files.
-This can be used in your workflows for other uses such as version validation, version tag management, and more!!
-
+This **GitHub Action** can be used to verify if a nuget package of a particular version exists.
 
 
 <div align="center"><h3 style="font-weight:bold">Quick Example</h3></div>
 
 
 ```yaml
-# TODO: Add YAML example
+name: GotNuget Action Sample
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Test_Action:
+    name: Test GotNuget GitHub Action
+    runs-on: ubuntu-latest 👈🏼 # Must be ubuntu
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check If Nuget Package Exists
+      id: nuget-exists
+      uses: KinsonDigital/GotNuget@v1.0.0-preview.1
+      with:
+        package-name: MyPackage
+        version: 1.2.3
+
+    - name: Print Output Result #Powershell Core
+      shell: pwsh 👈🏼 # Must be explicit with the shell to use powershell on ubuntu
+      run: |
+        #        Output name for the GotNuget github action 👇🏼
+        #                                               _____|_____
+        #                                              |          |
+        $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
+        
+        if ($nugetExists -eq "true") {
+          Write-Host "The nuget package exists!!";
+        } else {
+          Write-Host "The nuget package does not exist!!";
+        }
 ```
 
 <div align="left">
-<a href="#examples">More Examples Below!! 👇🏼</a> TODO: This might not be required to be here
+<a href="#examples">More Examples Below!! 👇🏼</a>
 </div>
 
 ---
 
 <div align="center"><h2 style="font-weight:bold">What does it do?</h2></div>
 
-TODO: Explain what it does
+It is simple.  It simply goes out to [nuget.org](https://www.nuget.org) and checks to see if a nuget package of a particular version exists.  If it does, it returns and output value of `"true"`, if not, then it returns `"false"`.
+Thats it!!
 
 ---
 
@@ -49,8 +80,10 @@ TODO: Explain what it does
 TODO: Show action inputs in table
 
 | Input Name | Description | Required | Default Value |
-|---|:----|:---:|---|
-| `sample-input` | Just a sample!! | yes | N/A |
+|---|:----|:---:|:---:|
+| `package-name` | The name of the nuget package. | yes | N/A |
+| `version` | The version of the package to look for. | yes | N/A |
+| `fail-when-not-found` | Will fail the job if the nuget package of a specific version is not found. | no | false |
 
 ---
 
@@ -59,17 +92,19 @@ TODO: Show action inputs in table
 ## **Examples**
 </div>
 
-TODO: Show examples if required
-
 <div align="center">
 
-### **Example 1 - (Example 1)**
+### **Fail the job if the package is not found**
 </div>
 
-<div align="center">
-
-### **Example 2 - (Example 2)**
-</div>
+``` yaml
+- name: Check If Nuget Package Exists
+  uses: KinsonDigital/GotNuget@v1.0.0-preview.1
+  with:
+    package-name: MyPackage
+    version: 100.20.3
+    fail-when-not-found: true
+```
 
 ---
 
