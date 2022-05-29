@@ -91,7 +91,7 @@ public sealed class GitHubAction : IGitHubAction
     /// </summary>
     private void ShowWelcomeMessage()
     {
-        _gitHubConsoleService.WriteLine("Welcome To The GotNuget GitHub Action!!");
+        _gitHubConsoleService.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫");
         _gitHubConsoleService.BlankLine();
     }
 }
