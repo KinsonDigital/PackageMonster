@@ -13,18 +13,14 @@ public class NugetNotFoundException : Exception
     /// Initializes a new instance of the <see cref="NugetNotFoundException"/> class.
     /// </summary>
     public NugetNotFoundException()
-        : base("The nuget package was not found.")
-    {
-    }
+        : base("The nuget package was not found.") => HResult = 60;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NugetNotFoundException"/> class.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     public NugetNotFoundException(string message)
-        : base(message)
-    {
-    }
+        : base(message) => HResult = 60;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NugetNotFoundException"/> class.
@@ -34,8 +30,6 @@ public class NugetNotFoundException : Exception
     ///     The <see cref="Exception"/> instance that caused the current exception.
     /// </param>
     public NugetNotFoundException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+        : base(message, innerException) => HResult = 60;
 }
 

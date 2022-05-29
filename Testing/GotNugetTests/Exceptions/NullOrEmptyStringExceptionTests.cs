@@ -21,6 +21,7 @@ public class NullOrEmptyStringExceptionTests
 
         // Assert
         exception.Message.Should().Be("The string must not be null or empty.");
+        exception.HResult.Should().Be(50);
     }
 
     [Fact]
@@ -31,6 +32,7 @@ public class NullOrEmptyStringExceptionTests
 
         // Assert
         exception.Message.Should().Be("test-message");
+        exception.HResult.Should().Be(50);
     }
 
     [Fact]
@@ -45,6 +47,7 @@ public class NullOrEmptyStringExceptionTests
         // Assert
         deviceException.InnerException.Message.Should().Be("inner-exception");
         deviceException.Message.Should().Be("test-exception");
+        deviceException.HResult.Should().Be(50);
     }
     #endregion
 }

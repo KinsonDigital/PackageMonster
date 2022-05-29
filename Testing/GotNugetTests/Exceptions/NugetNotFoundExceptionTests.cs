@@ -21,6 +21,7 @@ public class NugetNotFoundExceptionTests
 
         // Assert
         exception.Message.Should().Be("The nuget package was not found.");
+        exception.HResult.Should().Be(60);
     }
 
     [Fact]
@@ -31,6 +32,7 @@ public class NugetNotFoundExceptionTests
 
         // Assert
         exception.Message.Should().Be("test-message");
+        exception.HResult.Should().Be(60);
     }
 
     [Fact]
@@ -45,6 +47,7 @@ public class NugetNotFoundExceptionTests
         // Assert
         deviceException.InnerException.Message.Should().Be("inner-exception");
         deviceException.Message.Should().Be("test-exception");
+        deviceException.HResult.Should().Be(60);
     }
     #endregion
 }

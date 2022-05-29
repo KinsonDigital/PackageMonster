@@ -13,18 +13,14 @@ public class NullOrEmptyStringException : Exception
     /// Initializes a new instance of the <see cref="NullOrEmptyStringException"/> class.
     /// </summary>
     public NullOrEmptyStringException()
-        : base("The string must not be null or empty.")
-    {
-    }
+        : base("The string must not be null or empty.") => HResult = 50;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NullOrEmptyStringException"/> class.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     public NullOrEmptyStringException(string message)
-        : base(message)
-    {
-    }
+        : base(message) => HResult = 50;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NullOrEmptyStringException"/> class.
@@ -34,7 +30,5 @@ public class NullOrEmptyStringException : Exception
     ///     The <see cref="Exception"/> instance that caused the current exception.
     /// </param>
     public NullOrEmptyStringException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+        : base(message, innerException) => HResult = 50;
 }
