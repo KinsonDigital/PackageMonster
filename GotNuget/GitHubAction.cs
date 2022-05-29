@@ -38,7 +38,7 @@ public sealed class GitHubAction : IGitHubAction
 
         try
         {
-            _gitHubConsoleService.WriteLine($"Searching for package '{inputs.PackageName}' v{inputs.Version} . . . ");
+            _gitHubConsoleService.Write($"Searching for package '{inputs.PackageName} v{inputs.Version}' . . . ");
             var versions = await _nugetDataService.GetNugetVersions(inputs.PackageName);
 
             var versionFound = versions
@@ -47,7 +47,7 @@ public sealed class GitHubAction : IGitHubAction
 
             var searchEndMsg = versionFound ? "package found!!" : "package not found!!";
 
-            _gitHubConsoleService.Write(searchEndMsg);
+            _gitHubConsoleService.WriteLine(searchEndMsg);
             _gitHubConsoleService.BlankLine();
 
             _actionOutputService.SetOutputValue("nuget-exists", versionFound.ToString().ToLower());
@@ -57,7 +57,7 @@ public sealed class GitHubAction : IGitHubAction
                 : string.Empty;
 
             var foundResultMsg = $"{emoji}The nuget package '{inputs.PackageName}'";
-            foundResultMsg += $" with the version '{inputs.Version}' was{(versionFound ? string.Empty : " not")} found.";
+            foundResultMsg += $" with the version 'v{inputs.Version}' was{(versionFound ? string.Empty : " not")} found.";
 
             if (versionFound is false)
             {

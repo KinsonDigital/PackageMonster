@@ -52,7 +52,7 @@ public class GitHubActionTests
         string expectedOutput)
     {
         // Arrange
-        var expectedSearchMsgStart = $"Searching for package '{packageName}' v{version} . . . ";
+        var expectedSearchMsgStart = $"Searching for package '{packageName} v{version}' . . . ";
         var expectedSearchMsgEnd = expectedOutput == "true" ? "package found!!" : "package not found!!";
 
         _mockDataService.Setup(m => m.GetNugetVersions(packageName))
@@ -68,10 +68,10 @@ public class GitHubActionTests
         // Assert
         await act.Should().NotThrowAsync();
         var expectedResultMsg = $"✅The nuget package '{packageName}'";
-        expectedResultMsg += $" with the version '{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
+        expectedResultMsg += $" with the version 'v{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
 
-        _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgStart));
-        _mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgEnd, false));
+        _mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgStart, false));
+        _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgEnd));
         _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
         _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(4));
         _mockActionOutputService.VerifyOnce(m => m.SetOutputValue("nuget-exists", expectedOutput));
@@ -95,7 +95,7 @@ public class GitHubActionTests
         // Assert
         await act.Should()
             .ThrowAsync<NugetNotFoundException>()
-            .WithMessage($"The nuget package '{inputs.PackageName}' with the version '{inputs.Version}' was not found.");
+            .WithMessage($"The nuget package '{inputs.PackageName}' with the version 'v{inputs.Version}' was not found.");
     }
 
     [Theory]
