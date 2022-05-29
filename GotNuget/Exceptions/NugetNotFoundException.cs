@@ -32,4 +32,3 @@ public class NugetNotFoundException : Exception
     public NugetNotFoundException(string message, Exception innerException)
         : base(message, innerException) => HResult = 60;
 }
-

@@ -3,10 +3,10 @@
 // </copyright>
 
 using FluentAssertions;
-using Moq;
 using GotNuget.Exceptions;
 using GotNuget.Services;
 using GotNugetTests.Helpers;
+using Moq;
 
 namespace GotNugetTests.Services;
 

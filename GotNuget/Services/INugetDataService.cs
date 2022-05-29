@@ -1,4 +1,8 @@
-﻿namespace GotNuget.Services;
+﻿// <copyright file="INugetDataService.cs" company="KinsonDigital">
+// Copyright (c) KinsonDigital. All rights reserved.
+// </copyright>
+
+namespace GotNuget.Services;
 
 /// <summary>
 /// Provides access to nuget.org data.

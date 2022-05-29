@@ -22,4 +22,3 @@ public interface IArgParsingService<T> : IDisposable
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     Task ParseArguments(T inputs, IEnumerable<string> args, Func<T, Task> onSuccess, Action<string[]> onFailure);
 }
-
