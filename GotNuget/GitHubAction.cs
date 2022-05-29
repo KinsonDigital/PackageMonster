@@ -46,11 +46,24 @@ public sealed class GitHubAction : IGitHubAction
 
             _actionOutputService.SetOutputValue("nuget-exists", versionFound.ToString().ToLower());
 
+            var emoji = inputs.FailWhenNotFound is false
+                ? "✅"
+                : string.Empty;
+
+            var foundResultMsg = $"{emoji}The nuget package '{inputs.PackageName}'";
+            foundResultMsg += $" with the version '{inputs.Version}' was{(versionFound ? string.Empty : " not")} found.";
+
             if (versionFound is false)
             {
-                var exceptionMsg = $"The nuget package '{inputs.PackageName}' with the version '{inputs.Version}' was not found.";
-                throw new NugetNotFoundException(exceptionMsg);
+                if (inputs.FailWhenNotFound is true)
+                {
+                    throw new NugetNotFoundException(foundResultMsg);
+                }
             }
+
+            _gitHubConsoleService.BlankLine();
+            _gitHubConsoleService.WriteLine(foundResultMsg);
+            _gitHubConsoleService.BlankLine();
         }
         catch (Exception e)
         {

@@ -56,23 +56,32 @@ public class GitHubActionTests
             .ReturnsAsync(new[] { "1.2.3", "4.5.6" });
         var onCompletedInvoked = false;
 
-        var inputs = CreateInputs(packageName, version);
+        var inputs = CreateInputs(packageName, version, false);
         var action = CreateAction();
 
         // Act
-        var act = () => action.Run(inputs, () => onCompletedInvoked = true, _ => { });
+        var act = () => action.Run(inputs, () => onCompletedInvoked = true, e => throw e);
 
         // Assert
         await act.Should().NotThrowAsync();
+        var expectedResultMsg = $"✅The nuget package '{packageName}'";
+        expectedResultMsg += $" with the version '{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
+
+        _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
+        _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(3));
         _mockActionOutputService.VerifyOnce(m => m.SetOutputValue("nuget-exists", expectedOutput));
         onCompletedInvoked.Should().BeTrue("the 'onCompleted()' was never invoked");
     }
 
     [Fact]
-    public async void Run_WhenPackageIsNotFoundWithFailSetToTrue_ThrowsException()
+    public async void Run_WhenPackageIsNotFoundWithFailSetToTrue_ThrowsExceptionWithFailure()
     {
         // Arrange
-        var inputs = CreateInputs();
+        var inputs = CreateInputs(failWhenNotFound: true);
+
+        _mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+            .ReturnsAsync(Array.Empty<string>());
+
         var action = CreateAction();
 
         // Act
@@ -82,6 +91,27 @@ public class GitHubActionTests
         await act.Should()
             .ThrowAsync<NugetNotFoundException>()
             .WithMessage($"The nuget package '{inputs.PackageName}' with the version '{inputs.Version}' was not found.");
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(null)]
+    public async void Run_WhenPackageIsNotFoundWithFailSetToFalseOrNull_DoesNotThrowException(bool? failWhenNotFound)
+    {
+        // Arrange
+        var inputs = CreateInputs(failWhenNotFound: failWhenNotFound);
+
+        _mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+            .ReturnsAsync(Array.Empty<string>());
+
+        var action = CreateAction();
+
+        // Act
+        var act = () => action.Run(inputs, () => { }, e => throw e);
+
+        // Assert
+        await act.Should()
+            .NotThrowAsync<NugetNotFoundException>();
     }
 
     [Fact]
@@ -122,10 +152,14 @@ public class GitHubActionTests
     /// Creates a new instance of <see cref="ActionInputs"/> for the purpose of testing.
     /// </summary>
     /// <returns>The instance to test.</returns>
-    private static ActionInputs CreateInputs(string packageName = "test-package", string version = "1.2.3") => new ()
+    private static ActionInputs CreateInputs(
+        string packageName = "test-package",
+        string version = "1.2.3",
+        bool? failWhenNotFound = true) => new ()
     {
         PackageName = packageName,
         Version = version,
+        FailWhenNotFound = failWhenNotFound,
     };
 
     /// <summary>

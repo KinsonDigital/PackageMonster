@@ -33,7 +33,9 @@ public class AppService : IAppService
     /// <inheritdoc/>
     public void ExitWithException(Exception exception)
     {
+        _gitHubConsoleService.BlankLine();
         _gitHubConsoleService.WriteError(exception.Message);
+        _gitHubConsoleService.BlankLine();
         Exit(exception.HResult);
     }
 }

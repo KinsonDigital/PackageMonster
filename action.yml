@@ -14,7 +14,7 @@ inputs:
   fail-when-not-found:
     description: 'If true, will fail the workflow if the nuget package of the requested version does not exist.'
     required: false
-    default: 'false'
+    default: false
 
 outputs:
   nuget-exists:

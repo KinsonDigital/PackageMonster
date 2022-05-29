@@ -28,12 +28,12 @@ public class ActionInputs
     public string Version { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the name of the package.
+    /// Gets or sets a value indicating whether or not the action will fail if the package was not found.
     /// </summary>
     [Option(
         "fail-when-not-found",
         Required = false,
         Default = false,
         HelpText = "If true, will fail the workflow if the nuget package of the requested version does not exist.")]
-    public string FailWhenNotFound { get; set; } = string.Empty;
+    public bool? FailWhenNotFound { get; set; }
 }
