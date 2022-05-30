@@ -13,18 +13,18 @@ namespace GotNugetTests;
 
 public class GitHubActionTests
 {
-    private readonly Mock<IGitHubConsoleService> _mockConsoleService;
-    private readonly Mock<INugetDataService> _mockDataService;
-    private readonly Mock<IActionOutputService> _mockActionOutputService;
+    private readonly Mock<IGitHubConsoleService> mockConsoleService;
+    private readonly Mock<INugetDataService> mockDataService;
+    private readonly Mock<IActionOutputService> mockActionOutputService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GitHubActionTests"/> class.
     /// </summary>
     public GitHubActionTests()
     {
-        _mockConsoleService = new Mock<IGitHubConsoleService>();
-        _mockDataService = new Mock<INugetDataService>();
-        _mockActionOutputService = new Mock<IActionOutputService>();
+        this.mockConsoleService = new Mock<IGitHubConsoleService>();
+        this.mockDataService = new Mock<INugetDataService>();
+        this.mockActionOutputService = new Mock<IActionOutputService>();
     }
 
     #region Method Tests
@@ -38,8 +38,8 @@ public class GitHubActionTests
         await action.Run(inputs, () => { }, _ => { });
 
         // Assert
-        _mockConsoleService.VerifyOnce(m => m.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫"));
-        _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(2));
+        this.mockConsoleService.VerifyOnce(m => m.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫"));
+        this.mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(2));
     }
 
     [Theory]
@@ -55,7 +55,7 @@ public class GitHubActionTests
         var expectedSearchMsgStart = $"Searching for package '{packageName} v{version}' . . . ";
         var expectedSearchMsgEnd = expectedOutput == "true" ? "package found!!" : "package not found!!";
 
-        _mockDataService.Setup(m => m.GetNugetVersions(packageName))
+        this.mockDataService.Setup(m => m.GetNugetVersions(packageName))
             .ReturnsAsync(new[] { "1.2.3", "4.5.6" });
         var onCompletedInvoked = false;
 
@@ -70,11 +70,11 @@ public class GitHubActionTests
         var expectedResultMsg = $"✅The nuget package '{packageName}'";
         expectedResultMsg += $" with the version 'v{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
 
-        _mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgStart, false));
-        _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgEnd));
-        _mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
-        _mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(4));
-        _mockActionOutputService.VerifyOnce(m => m.SetOutputValue("nuget-exists", expectedOutput));
+        this.mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgStart, false));
+        this.mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgEnd));
+        this.mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
+        this.mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(4));
+        this.mockActionOutputService.VerifyOnce(m => m.SetOutputValue("nuget-exists", expectedOutput));
         onCompletedInvoked.Should().BeTrue("the 'onCompleted()' was never invoked");
     }
 
@@ -84,7 +84,7 @@ public class GitHubActionTests
         // Arrange
         var inputs = CreateInputs(failWhenNotFound: true);
 
-        _mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
             .ReturnsAsync(Array.Empty<string>());
 
         var action = CreateAction();
@@ -106,7 +106,7 @@ public class GitHubActionTests
         // Arrange
         var inputs = CreateInputs(failWhenNotFound: failWhenNotFound);
 
-        _mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
             .ReturnsAsync(Array.Empty<string>());
 
         var action = CreateAction();
@@ -123,7 +123,7 @@ public class GitHubActionTests
     public async void Run_WhenAnExceptionIsThrown_InvokesOnErrorActionParam()
     {
         // Arrange
-        _mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
             .Callback<string>(_ => throw new Exception("test-exception"));
         Exception? exception = null;
 
@@ -149,7 +149,7 @@ public class GitHubActionTests
         action.Dispose();
 
         // Assert
-        _mockDataService.VerifyOnce(m => m.Dispose());
+        this.mockDataService.VerifyOnce(m => m.Dispose());
     }
     #endregion
 
@@ -172,5 +172,5 @@ public class GitHubActionTests
     /// </summary>
     /// <returns>The instance to test.</returns>
     private GitHubAction CreateAction()
-        => new (_mockConsoleService.Object, _mockDataService.Object, _mockActionOutputService.Object);
+        => new (this.mockConsoleService.Object, this.mockDataService.Object, this.mockActionOutputService.Object);
 }

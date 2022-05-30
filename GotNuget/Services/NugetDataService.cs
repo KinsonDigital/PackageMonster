@@ -19,13 +19,13 @@ public sealed class NugetDataService : INugetDataService
      * 2.Nuget Server API: https://docs.microsoft.com/en-us/nuget/api/overview
      */
     private const string BaseUrl = "https://api.nuget.org";
-    private readonly RestClient _client;
-    private bool _isDisposed;
+    private readonly RestClient client;
+    private bool isDisposed;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NugetDataService"/> class.
     /// </summary>
-    public NugetDataService() => _client = new RestClient(BaseUrl);
+    public NugetDataService() => this.client = new RestClient(BaseUrl);
 
     /// <inheritdoc />
     /// <remarks>
@@ -45,13 +45,13 @@ public sealed class NugetDataService : INugetDataService
             throw new ArgumentNullException(nameof(packageName), $"Must provide a nuget package name.");
         }
 
-        _client.AcceptedContentTypes = new[] { "application/vnd.github.v3+json" };
+        this.client.AcceptedContentTypes = new[] { "application/vnd.github.v3+json" };
 
         const string serviceIndexId = "v3-flatcontainer";
         var fullUrl = $"{BaseUrl}/{serviceIndexId}/{packageName.ToLower()}/index.json";
         var request = new RestRequest(fullUrl);
 
-        var response = await _client.ExecuteAsync<NugetVersionsModel>(request, Method.Get);
+        var response = await this.client.ExecuteAsync<NugetVersionsModel>(request, Method.Get);
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
@@ -69,13 +69,13 @@ public sealed class NugetDataService : INugetDataService
     /// <inheritdoc />
     public void Dispose()
     {
-        if (_isDisposed)
+        if (this.isDisposed)
         {
             return;
         }
 
-        _client.Dispose();
+        this.client.Dispose();
 
-        _isDisposed = true;
+        this.isDisposed = true;
     }
 }

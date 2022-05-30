@@ -10,10 +10,10 @@ namespace GotNuget;
 /// <inheritdoc/>
 public sealed class GitHubAction : IGitHubAction
 {
-    private readonly IGitHubConsoleService _gitHubConsoleService;
-    private readonly INugetDataService _nugetDataService;
-    private readonly IActionOutputService _actionOutputService;
-    private bool _isDisposed;
+    private readonly IGitHubConsoleService gitHubConsoleService;
+    private readonly INugetDataService nugetDataService;
+    private readonly IActionOutputService actionOutputService;
+    private bool isDisposed;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GitHubAction"/> class.
@@ -26,9 +26,9 @@ public sealed class GitHubAction : IGitHubAction
         INugetDataService nugetDataService,
         IActionOutputService actionOutputService)
     {
-        _gitHubConsoleService = gitHubConsoleService;
-        _nugetDataService = nugetDataService;
-        _actionOutputService = actionOutputService;
+        this.gitHubConsoleService = gitHubConsoleService;
+        this.nugetDataService = nugetDataService;
+        this.actionOutputService = actionOutputService;
     }
 
     /// <inheritdoc/>
@@ -38,8 +38,8 @@ public sealed class GitHubAction : IGitHubAction
 
         try
         {
-            _gitHubConsoleService.Write($"Searching for package '{inputs.PackageName} v{inputs.Version}' . . . ");
-            var versions = await _nugetDataService.GetNugetVersions(inputs.PackageName);
+            this.gitHubConsoleService.Write($"Searching for package '{inputs.PackageName} v{inputs.Version}' . . . ");
+            var versions = await this.nugetDataService.GetNugetVersions(inputs.PackageName);
 
             var versionFound = versions
                 .Any(version =>
@@ -47,10 +47,10 @@ public sealed class GitHubAction : IGitHubAction
 
             var searchEndMsg = versionFound ? "package found!!" : "package not found!!";
 
-            _gitHubConsoleService.WriteLine(searchEndMsg);
-            _gitHubConsoleService.BlankLine();
+            this.gitHubConsoleService.WriteLine(searchEndMsg);
+            this.gitHubConsoleService.BlankLine();
 
-            _actionOutputService.SetOutputValue("nuget-exists", versionFound.ToString().ToLower());
+            this.actionOutputService.SetOutputValue("nuget-exists", versionFound.ToString().ToLower());
 
             var emoji = inputs.FailWhenNotFound is false
                 ? "✅"
@@ -67,9 +67,9 @@ public sealed class GitHubAction : IGitHubAction
                 }
             }
 
-            _gitHubConsoleService.BlankLine();
-            _gitHubConsoleService.WriteLine(foundResultMsg);
-            _gitHubConsoleService.BlankLine();
+            this.gitHubConsoleService.BlankLine();
+            this.gitHubConsoleService.WriteLine(foundResultMsg);
+            this.gitHubConsoleService.BlankLine();
         }
         catch (Exception e)
         {
@@ -82,14 +82,14 @@ public sealed class GitHubAction : IGitHubAction
     /// <inheritdoc />
     public void Dispose()
     {
-        if (_isDisposed)
+        if (this.isDisposed)
         {
             return;
         }
 
-        _nugetDataService.Dispose();
+        this.nugetDataService.Dispose();
 
-        _isDisposed = true;
+        this.isDisposed = true;
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public sealed class GitHubAction : IGitHubAction
     /// </summary>
     private void ShowWelcomeMessage()
     {
-        _gitHubConsoleService.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫");
-        _gitHubConsoleService.BlankLine();
+        this.gitHubConsoleService.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫");
+        this.gitHubConsoleService.BlankLine();
     }
 }
