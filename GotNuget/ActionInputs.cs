@@ -19,8 +19,11 @@ public class ActionInputs
     public string PackageName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the name of the package.
+    /// Gets or sets the nuget package version to check for.
     /// </summary>
+    /// <remarks>
+    /// Version search  is not case-sensitive.
+    /// </remarks>
     [Option(
         "version",
         Required = true,

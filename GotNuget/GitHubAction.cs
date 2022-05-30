@@ -93,7 +93,7 @@ public sealed class GitHubAction : IGitHubAction
     }
 
     /// <summary>
-    /// Shows a welcome message with additional information.
+    /// Shows a welcome message.
     /// </summary>
     private void ShowWelcomeMessage()
     {
