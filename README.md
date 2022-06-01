@@ -33,7 +33,7 @@ on:
 jobs:
   Test_Action:
     name: Test GotNuget GitHub Action
-    runs-on: ubuntu-latest 👈🏼 # Must be ubuntu
+    runs-on: ubuntu-latest 👈🏼 # Must be this value
     steps:
     - uses: actions/checkout@v2
 
@@ -45,7 +45,7 @@ jobs:
         version: 1.2.3
 
     - name: Print Output Result #PowerShell Core
-      shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on ubuntu
+      shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on Ubuntu
       run: |
         #        Output name for the GotNuget GitHub action 👇🏼
         #                                               _____|_____
@@ -53,9 +53,9 @@ jobs:
         $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
         
         if ($nugetExists -eq "true") {
-          Write-Host "The nuget package exists!!";
+          Write-Host "The NuGet package exists!!";
         } else {
-          Write-Host "The nuget package does not exist!!";
+          Write-Host "The NuGet package does not exist!!";
         }
 ```
 
