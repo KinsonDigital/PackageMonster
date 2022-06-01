@@ -9,7 +9,7 @@ inputs:
     description: 'The name of the package.  This is not case-sensitive.'
     required: true
   version:
-    description: 'The version of the NuGet package to check for.  This is not case-sensitive.'
+    description: 'The version of the NuGet package to check.  This is not case-sensitive.'
     required: true
   fail-when-not-found:
     description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'

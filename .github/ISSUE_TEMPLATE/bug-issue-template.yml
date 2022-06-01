@@ -47,10 +47,10 @@ body:
 
 - type: textarea
   attributes:
-    label: If you know what version of _**ubuntu**_ the action is running one, enter this here.
-    description: Enter ubuntu operating system version here
+    label: If you know what version of Ubuntu the action is running one, enter this here.
+    description: Enter Ubuntu operating system version here
     placeholder: |
-      Examples: `ubuntu-latest` or `ubuntu-20.04`
+      Examples: `ubuntu-latest` or `Ubuntu-20.04`
       If you do not know what version it is due to using the value `ubuntu-latest`, this can be found in the
       console logs produced by running the action.
       Refer to [here](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on) for more information.

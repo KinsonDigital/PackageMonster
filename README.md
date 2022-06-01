@@ -18,7 +18,7 @@
 </div>
 
 
-This **GitHub Action** can be used to verify if a NuGet package of a particular version exists.
+This **GitHub Action** can be used to verify whether or not a particular version of a NuGet package exists.
 
 
 <div align="center"><h3 style="font-weight:bold">Quick Example</h3></div>
@@ -44,10 +44,10 @@ jobs:
         package-name: MyPackage
         version: 1.2.3
 
-    - name: Print Output Result #Powershell Core
-      shell: pwsh 👈🏼 # Must be explicit with the shell to use powershell on ubuntu
+    - name: Print Output Result #PowerShell Core
+      shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on ubuntu
       run: |
-        #        Output name for the GotNuget github action 👇🏼
+        #        Output name for the GotNuget GitHub action 👇🏼
         #                                               _____|_____
         #                                              |          |
         $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
@@ -67,7 +67,7 @@ jobs:
 
 <div align="center"><h2 style="font-weight:bold">What does it do?</h2></div>
 
-It is simple.  It simply goes out to [nuget.org](https://www.nuget.org) and checks to see if a nuget package of a particular version exists.  If it does, it returns and output value of `"true"`, if not, then it returns `"false"`.
+It is simple!  It goes out to [nuget.org](https://www.nuget.org) and checks to see if a NuGet package of a particular version exists.  If it does, it returns and output value of `"true"`, if not, then it returns `"false"`.
 Thats it!!
 
 ---
@@ -79,11 +79,11 @@ Thats it!!
 
 TODO: Show action inputs in table
 
-| Input Name | Description | Required | Default Value |
-|---|:----|:---:|:---:|
-| `package-name` | The name of the nuget package. | yes | N/A |
-| `version` | The version of the package to look for. | yes | N/A |
-| `fail-when-not-found` | Will fail the job if the nuget package of a specific version is not found. | no | false |
+| Input Name | Description                                                                | Required | Default Value |
+|---|:---------------------------------------------------------------------------|:---:|:---:|
+| `package-name` | The name of the NuGet package.                                             | yes | N/A |
+| `version` | The version of the package.                                                | yes | N/A |
+| `fail-when-not-found` | Will fail the job if the NuGet package of a specific version is not found. | no | false |
 
 ---
 

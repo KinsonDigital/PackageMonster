@@ -20,7 +20,7 @@ public static class ExtensionMethodsForTesting
     /// <param name="value">The object that contains the property.</param>
     /// <param name="propName">The name of the property on the object.</param>
     /// <typeparam name="T">The type of attribute on the property.</typeparam>
-    /// <returns>The attribute if it exists.</returns>
+    /// <returns>The existing attribute.</returns>
     /// <exception cref="AssertActualExpectedException">
     ///     Thrown if the property or attribute does not exist.
     /// </exception>
@@ -82,7 +82,7 @@ public static class ExtensionMethodsForTesting
     /// <param name="defaultExpected">The expected value of the <see cref="BaseAttribute.Default"/> property.</param>
     /// <param name="helpTextExpected">The expected value of the <see cref="OptionAttribute.HelpText"/> property.</param>
     /// <exception cref="AssertActualExpectedException">
-    ///     Thrown if the any of the properties are not the correct values.
+    ///     Thrown if the properties do not have the correct values.
     /// </exception>
     public static void AssertOptionAttrProps(this OptionAttribute value,
         string longNameExpected,
@@ -136,7 +136,7 @@ public static class ExtensionMethodsForTesting
     /// <param name="requiredExpected">The expected value of the <see cref="OptionAttribute.Required"/> property.</param>
     /// <param name="helpTextExpected">The expected value of the <see cref="OptionAttribute.HelpText"/> property.</param>
     /// <exception cref="AssertActualExpectedException">
-    ///     Thrown if the any of the properties are not the correct values.
+    ///     Thrown if the properties do not have the correct values.
     /// </exception>
     public static void AssertOptionAttrProps(this OptionAttribute value,
         string longNameExpected,
