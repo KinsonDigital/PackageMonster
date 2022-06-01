@@ -1,22 +1,33 @@
-name: 'SAMPLE-ACTION' #TODO: Set the name of the action
-description: 'Gets version information from a .csproj file.'
+name: 'GotNuget'
+description: 'Checks if a NuGet package exists in the nuget.org public repository.'
+author: 'Calvin Wilkinson (KinsonDigital)'
+branding:
+  icon: settings
+  color: purple
 inputs:
-  nuget-package-name:
-    description: 'The full name of the nuget package.  NOTE: Not case sensitive'
+  package-name:
+    description: 'The name of the package.  This is not case-sensitive.'
     required: true
   version:
-    description: |
-      The version to check for.  If the 'fail-if-version-exists' is set to true,
-      then the action will fail of the version exists for the nuget package.
-      The output 'version-exists' will be set to true if the version does exist
-      and false if it does not.
+    description: 'The version of the NuGet package to check.  This is not case-sensitive.'
     required: true
-  fail-if-version-exists:
-    description: 'If true will fail if the nuget package version exists.'
+  fail-when-not-found:
+    description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'
     required: false
+    default: false
+
 outputs:
-  version-exists: # True of false value
-    description: 'The value of "true" or "false" if the version for the "version" exists.'
+  nuget-exists:
+    description: 'True if the NuGet package exists.'
+
+# These are the arguments that are passed into the console app
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - '--package-name'
+  - ${{ inputs.package-name }}
+  - '--version'
+  - ${{ inputs.version }}
+  - '--fail-when-not-found'
+  - ${{ inputs.fail-when-not-found }}
