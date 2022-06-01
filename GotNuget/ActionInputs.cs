@@ -19,15 +19,15 @@ public class ActionInputs
     public string PackageName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the nuget package version to check for.
+    /// Gets or sets the NuGet package version to check.
     /// </summary>
     /// <remarks>
-    /// Version search  is not case-sensitive.
+    /// Version search is not case-sensitive.
     /// </remarks>
     [Option(
         "version",
         Required = true,
-        HelpText = "The version of the nuget package to check for.  This is not case-sensitive.")]
+        HelpText = "The version of the NuGet package to check.  This is not case-sensitive.")]
     public string Version { get; set; } = string.Empty;
 
     /// <summary>
@@ -37,6 +37,6 @@ public class ActionInputs
         "fail-when-not-found",
         Required = false,
         Default = false,
-        HelpText = "If true, will fail the workflow if the nuget package of the requested version does not exist.")]
+        HelpText = "If true, will fail the workflow if the NuGet package of the requested version does not exist.")]
     public bool? FailWhenNotFound { get; set; }
 }

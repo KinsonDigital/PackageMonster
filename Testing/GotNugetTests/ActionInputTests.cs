@@ -32,12 +32,12 @@ public class ActionInputTests
         inputs.PackageName.Should().BeEmpty();
         typeof(ActionInputs).GetProperty(nameof(ActionInputs.Version)).Should().BeDecoratedWith<OptionAttribute>();
         inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.Version))
-            .AssertOptionAttrProps("version", true, "The version of the nuget package to check for.  This is not case-sensitive.");
+            .AssertOptionAttrProps("version", true, "The version of the NuGet package to check.  This is not case-sensitive.");
 
         inputs.PackageName.Should().BeEmpty();
         typeof(ActionInputs).GetProperty(nameof(ActionInputs.FailWhenNotFound)).Should().BeDecoratedWith<OptionAttribute>();
         inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.FailWhenNotFound))
-            .AssertOptionAttrProps("fail-when-not-found", false, false, "If true, will fail the workflow if the nuget package of the requested version does not exist.");
+            .AssertOptionAttrProps("fail-when-not-found", false, false, "If true, will fail the workflow if the NuGet package of the requested version does not exist.");
     }
     #endregion
 }

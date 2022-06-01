@@ -20,7 +20,7 @@ public class NugetNotFoundExceptionTests
         var exception = new NugetNotFoundException();
 
         // Assert
-        exception.Message.Should().Be("The nuget package was not found.");
+        exception.Message.Should().Be("The NuGet package was not found.");
         exception.HResult.Should().Be(60);
     }
 

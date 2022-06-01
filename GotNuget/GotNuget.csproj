@@ -17,7 +17,7 @@
     <Authors>Calvin Wilkinson</Authors>
     <Company>Kinson Digital</Company>
     <Product>GotNuget</Product>
-    <Description>Custom GitHub action used to check if nuget.org contains a nuget package of a particular version.</Description>
+    <Description>Custom GitHub action used to check if nuget.org contains a NuGet package of a particular version.</Description>
     <Copyright>Copyright ©2022 Kinson Digital</Copyright>
   </PropertyGroup>
 

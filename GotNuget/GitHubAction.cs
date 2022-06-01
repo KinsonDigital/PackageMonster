@@ -19,7 +19,7 @@ public sealed class GitHubAction : IGitHubAction
     /// Initializes a new instance of the <see cref="GitHubAction"/> class.
     /// </summary>
     /// <param name="gitHubConsoleService">Writes to the console.</param>
-    /// <param name="nugetDataService">Provides access to nuget data.</param>
+    /// <param name="nugetDataService">Provides access to NuGet data.</param>
     /// <param name="actionOutputService">Sets the output data of the action.</param>
     public GitHubAction(
         IGitHubConsoleService gitHubConsoleService,
@@ -56,7 +56,7 @@ public sealed class GitHubAction : IGitHubAction
                 ? "✅"
                 : string.Empty;
 
-            var foundResultMsg = $"{emoji}The nuget package '{inputs.PackageName}'";
+            var foundResultMsg = $"{emoji}The NuGet package '{inputs.PackageName}'";
             foundResultMsg += $" with the version 'v{inputs.Version}' was{(versionFound ? string.Empty : " not")} found.";
 
             if (versionFound is false)

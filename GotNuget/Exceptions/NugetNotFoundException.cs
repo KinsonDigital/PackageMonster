@@ -5,7 +5,7 @@
 namespace GotNuget.Exceptions;
 
 /// <summary>
-/// Occurs when a nuget package is not found.
+/// Occurs when a NuGet package is not found.
 /// </summary>
 public class NugetNotFoundException : Exception
 {
@@ -13,7 +13,7 @@ public class NugetNotFoundException : Exception
     /// Initializes a new instance of the <see cref="NugetNotFoundException"/> class.
     /// </summary>
     public NugetNotFoundException()
-        : base("The nuget package was not found.") => HResult = 60;
+        : base("The NuGet package was not found.") => HResult = 60;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NugetNotFoundException"/> class.

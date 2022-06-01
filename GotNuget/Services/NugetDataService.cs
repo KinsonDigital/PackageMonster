@@ -14,7 +14,7 @@ namespace GotNuget.Services;
 public sealed class NugetDataService : INugetDataService
 {
     /* Resources:
-     * These links refer to the documentation for the nuget API
+     * These links refer to the documentation for the NuGet API
      * 1. Package Content: https://docs.microsoft.com/en-us/nuget/api/package-base-address-resource
      * 2.Nuget Server API: https://docs.microsoft.com/en-us/nuget/api/overview
      */
@@ -29,7 +29,7 @@ public sealed class NugetDataService : INugetDataService
 
     /// <inheritdoc />
     /// <remarks>
-    ///     The param <paramref name="packageName"/> is not case sensitive.  The nuget API
+    ///     The param <paramref name="packageName"/> is not case sensitive.  The NuGet API
     ///     requires that it is in lowercase.  This is taken care of for you.
     /// </remarks>
     /// <exception cref="ArgumentNullException">
@@ -42,7 +42,7 @@ public sealed class NugetDataService : INugetDataService
     {
         if (string.IsNullOrEmpty(packageName))
         {
-            throw new ArgumentNullException(nameof(packageName), $"Must provide a nuget package name.");
+            throw new ArgumentNullException(nameof(packageName), $"Must provide a NuGet package name.");
         }
 
         this.client.AcceptedContentTypes = new[] { "application/vnd.github.v3+json" };
@@ -58,7 +58,7 @@ public sealed class NugetDataService : INugetDataService
             return response.Data is null ? Array.Empty<string>() : response.Data.Versions.ToArray();
         }
 
-        var exception = response.ErrorException ?? new Exception("There was an issue getting data from nuget.");
+        var exception = response.ErrorException ?? new Exception("There was an issue getting data from NuGet.");
 
         throw new HttpRequestException(
             exception.Message,

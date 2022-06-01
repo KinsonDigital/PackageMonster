@@ -5,7 +5,7 @@
 namespace GotNuget.Models;
 
 /// <summary>
-/// Holds information about a nuget package.
+/// Holds information about a NuGet package.
 /// </summary>
 /// <remarks>
 ///     This information comes from www.nuget.org
@@ -13,7 +13,7 @@ namespace GotNuget.Models;
 public record NugetVersionsModel
 {
     /// <summary>
-    /// Gets or sets the list of versions available for a nuget package.
+    /// Gets or sets the list of versions available for a NuGet package.
     /// </summary>
     public string[] Versions { get; set; } = Array.Empty<string>();
 }

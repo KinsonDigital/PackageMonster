@@ -5,7 +5,7 @@
 
 <div align="center">
 
-### GitHub Action for checking if a nuget package exists in the public nuget gallery package repository [nuget.org](https://www.nuget.org)
+### GitHub Action for checking if a NuGet package exists in the public NuGet gallery package repository [nuget.org](https://www.nuget.org)
 
 <div hidden>TODO: ADD BADGES HERE</div>
 
@@ -18,7 +18,7 @@
 </div>
 
 
-This **GitHub Action** can be used to verify if a nuget package of a particular version exists.
+This **GitHub Action** can be used to verify if a NuGet package of a particular version exists.
 
 
 <div align="center"><h3 style="font-weight:bold">Quick Example</h3></div>

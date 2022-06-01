@@ -67,7 +67,7 @@ public class GitHubActionTests
 
         // Assert
         await act.Should().NotThrowAsync();
-        var expectedResultMsg = $"✅The nuget package '{packageName}'";
+        var expectedResultMsg = $"✅The NuGet package '{packageName}'";
         expectedResultMsg += $" with the version 'v{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
 
         this.mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgStart, false));
@@ -95,7 +95,7 @@ public class GitHubActionTests
         // Assert
         await act.Should()
             .ThrowAsync<NugetNotFoundException>()
-            .WithMessage($"The nuget package '{inputs.PackageName}' with the version 'v{inputs.Version}' was not found.");
+            .WithMessage($"The NuGet package '{inputs.PackageName}' with the version 'v{inputs.Version}' was not found.");
     }
 
     [Theory]

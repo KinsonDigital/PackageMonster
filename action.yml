@@ -1,5 +1,5 @@
 name: 'GotNuget'
-description: 'Checks if a nuget package exists in the nuget.org public repository.'
+description: 'Checks if a NuGet package exists in the nuget.org public repository.'
 author: 'Calvin Wilkinson (KinsonDigital)'
 branding:
   icon: settings
@@ -9,16 +9,16 @@ inputs:
     description: 'The name of the package.  This is not case-sensitive.'
     required: true
   version:
-    description: 'The version of the nuget package to check for.  This is not case-sensitive.'
+    description: 'The version of the NuGet package to check for.  This is not case-sensitive.'
     required: true
   fail-when-not-found:
-    description: 'If true, will fail the workflow if the nuget package of the requested version does not exist.'
+    description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'
     required: false
     default: false
 
 outputs:
   nuget-exists:
-    description: 'True if the nuget package exists.'
+    description: 'True if the NuGet package exists.'
 
 # These are the arguments that are passed into the console app
 runs:
