@@ -6,8 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using GotNuget.Services;
 
-[assembly: InternalsVisibleTo("GotNugetTests", AllInternalsVisible = true)]
-
 namespace GotNuget;
 
 /// <summary>
