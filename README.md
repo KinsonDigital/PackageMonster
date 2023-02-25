@@ -42,7 +42,7 @@ jobs:
     name: Test GotNuget GitHub Action
     runs-on: ubuntu-latest 👈🏼 # Must be this value
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Check If Nuget Package Exists
       id: nuget-exists
