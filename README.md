@@ -117,23 +117,22 @@ TODO: Show action inputs in table
 
 <div align="center">
 
+## **🔧Maintainers**
+</div>
+
+- [![twitter-logo](https://raw.githubusercontent.com/KinsonDigital/.github/master/Images/twitter-logo-16x16.svg)Calvin Wilkinson](https://twitter.com/KDCoder) (KinsonDigital GitHub Organization - Owner)
+- [![twitter-logo](https://raw.githubusercontent.com/KinsonDigital/.github/master/Images/twitter-logo-16x16.svg)Kristen Wilkinson](https://twitter.com/kswilky) (KinsonDigital GitHub Organization - Documentation Maintainer & Tester)
+ 
+
+<div align="center">
+
 ## **Other Info**
+
 </div>
 
-<div align="left">
-
-### License
-- [MIT License - GotNuget](https://github.com/KinsonDigital/GotNuget/blob/preview/v1.0.0-preview.1/LICENSE)
-</div>
-
-<div align="left">
-
-### Maintainer
-</div>
-
-- [Calvin Wilkinson](https://github.com/CalvinWilkinson) (Owner and main contributor of the GitHub organization [KinsonDigital](https://github.com/KinsonDigital))
-  - [Got Nuget](https://github.com/KinsonDigital/GotNuget) is used in various projects for this organization with great success.
 - Click [here](https://github.com/KinsonDigital/GotNuget/issues/new/choose) to report any issues for this GitHub action!!
+- [MIT License](https://github.com/KinsonDigital/GotNuget/blob/preview/v1.0.0-preview.1/LICENSE)
+
 
 <div align="right">
 <a href="#what-is-it">Back to the top!👆🏼</a>
