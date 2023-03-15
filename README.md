@@ -48,8 +48,9 @@ jobs:
       id: nuget-exists
       uses: KinsonDigital/GotNuget@v1.0.0-preview.1
       with:
-        package-name: MyPackage
-        version: 1.2.3
+        package-name: MyPackage 👈🏻 # Required input
+        version: 1.2.3 👈🏻 # Required input
+        fail-when-not-found: true 👈🏻 # Optional input
 
     - name: Print Output Result #PowerShell Core
       shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on Ubuntu
@@ -99,27 +100,6 @@ TODO: Show action inputs in table
 
 The name of the output is `nuget-exists` and it returns a `boolean` of `true` or `false`.
 Refer to the _**Quick Example**_ for how to use the output of the action.
-
----
-
-<div align="center" style="font-weight:bold">
-
-## **Examples**
-</div>
-
-<div align="center">
-
-### **Fail the job if the package is not found**
-</div>
-
-``` yaml
-- name: Check If Nuget Package Exists
-  uses: KinsonDigital/GotNuget@v1.0.0-preview.1
-  with:
-    package-name: MyPackage
-    version: 100.20.3
-    fail-when-not-found: true
-```
 
 ---
 
