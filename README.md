@@ -92,6 +92,14 @@ TODO: Show action inputs in table
 | `version` | The version of the package.                                                | yes | N/A |
 | `fail-when-not-found` | Will fail the job if the NuGet package of a specific version is not found. | no | false |
 
+<div align="center">
+
+## **Action Output**
+</div>
+
+The name of the output is `nuget-exists` and it returns a `boolean` of `true` or `false`.
+Refer to the _**Quick Example**_ for how to use the output of the action.
+
 ---
 
 <div align="center" style="font-weight:bold">
