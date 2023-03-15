@@ -5,7 +5,11 @@
 
 <div align="center">
 
-<div hidden>TODO: ADD BADGES HERE</div>
+<div align="center">
+
+[![Good First GitHub Issues](https://img.shields.io/github/issues/kinsondigital/GotNuget/good%20first%20issue?color=7057ff&label=Good%20First%20Issues)](https://github.com/KinsonDigital/GotNuget/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+[![Discord](https://img.shields.io/discord/481597721199902720?color=%23575CCB&label=chat%20on%20discord&logo=discord&logoColor=white)](https://discord.gg/qewu6fNgv7)
+</div>
 
 </div>
 
