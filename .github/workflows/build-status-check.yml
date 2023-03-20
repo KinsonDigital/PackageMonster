@@ -15,7 +15,7 @@ jobs:
     name: Build Status Check
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Get Build Config
       id: get-build-config
@@ -28,7 +28,7 @@ jobs:
         }
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.NET_SDK_VERSION }}
 
