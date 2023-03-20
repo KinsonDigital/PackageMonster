@@ -9,7 +9,7 @@ coverage:
         flags: 
           - unit
         paths: 
-          - "VersionMiner"
+          - "GotNuget"
       #  # advanced settings
       #   branches: 
       #     - master
