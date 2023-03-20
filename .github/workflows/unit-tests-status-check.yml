@@ -3,7 +3,7 @@ name: ✅Unit Testing Status Check
 
 env:
   PROJECT_NAME: GotNuget
-  NET_SDK_VERSION: 7.0.300
+  NET_SDK_VERSION: 7.x
 
 
 defaults:
