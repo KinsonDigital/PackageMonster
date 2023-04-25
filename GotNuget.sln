@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		action.yml = action.yml
+		codecov.yml = codecov.yml
 		Dockerfile = Dockerfile
 		README.md = README.md
 		LICENSE.md = LICENSE.md
@@ -50,6 +51,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{77B96B49-4D77-456B-A787-E852E9842B60} = {0D648979-F6A2-4DBD-ABE7-BDCB9E0EE4BE}
 		{5010ECCD-3BCC-475D-87EE-31E289E24571} = {5F6905A4-928D-4A81-9D9B-B273A27B3A92}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD7716EC-6464-4FFB-837F-6E0390B1AC6A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD7716EC-6464-4FFB-837F-6E0390B1AC6A}
