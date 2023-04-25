@@ -5,31 +5,25 @@
 
 <div align="center">
 
-<div hidden>TODO: ADD BADGES HERE</div>
-
+[![Good First GitHub Issues](https://img.shields.io/github/issues/kinsondigital/GotNuget/good%20first%20issue?color=7057ff&label=Good%20First%20Issues)](https://github.com/KinsonDigital/GotNuget/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+[![Discord](https://img.shields.io/discord/481597721199902720?color=%23575CCB&label=chat%20on%20discord&logo=discord&logoColor=white)](https://discord.gg/qewu6fNgv7)
 </div>
-
 
 <div align="center">
 
-## **What is it?**
+## **🤷🏼‍♂️ What is it? 🤷🏼‍♂️**
 </div>
 
-### Checks if a NuGet package with a particular name and version exists in the public NuGet gallery package repository [nuget.org](https://www.nuget.org).
+### This GitHub action checks whether or not a NuGet package with a particular name and version exists in the public NuGet gallery package repository [nuget.org](https://www.nuget.org).
 
-<div align="center"><h2 style="font-weight:bold">⚠️Quick Note⚠️</h2></div>
+<br/>
 
-This GitHub action is built using C#/NET and runs in a docker container.  If the job step for running this action is contained in a job that runs on **Windows**, you will need to move the step to a job that runs on **Ubuntu**.  You can split up your jobs to fulfill `runs-on` requirements of the GitHub action. This can be accomplished by moving the step into it's own job.  You can then route the action step outputs to the job outputs and use them throughout the rest of your workflow. For more information, refer to the Github documentation links below:
+> **Note** This GitHub action is built using C#/NET and runs in a docker container.  If the job step for running this action is contained in a job that runs on **Windows**, you will need to move the step to a job that runs on **Ubuntu**.  You can split up your jobs to fulfill `runs-on` requirements of the GitHub action. This can be accomplished by moving the step into its own job.  You can then route the action step outputs to the job outputs and use them throughout the rest of your workflow. For more information, refer to the Github documentation links below:
+> For more info on step and job outputs, refer to the GitHub documentation links below:
+> - [Defining outputs for jobs](https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs)
+> - [Setting a step action output parameter](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-output-parameter)
 
-For more info on step and job outputs, refer to the GitHub documentation links below:
-- [Defining outputs for jobs](https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs)
-- [Setting a step action output parameter](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-output-parameter)
-
-This **GitHub Action** can be used to verify whether or not a particular version of a NuGet package exists.
-
-
-<div align="center"><h2 style="font-weight:bold">Quick Example</h2></div>
-
+<div align="center"><h2 style="font-weight:bold">🪧 Example 🪧</h2></div>
 
 ```yaml
 name: GotNuget Action Sample
@@ -38,9 +32,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  Test_Action:
+  Test_Action:em
     name: Test GotNuget GitHub Action
-    runs-on: ubuntu-latest 👈🏼 # Must be this value
+    runs-on: ubuntu-latest 👈🏼 # Required (Refer to the note above)
     steps:
     - uses: actions/checkout@v3
 
@@ -48,8 +42,9 @@ jobs:
       id: nuget-exists
       uses: KinsonDigital/GotNuget@v1.0.0-preview.1
       with:
-        package-name: MyPackage
-        version: 1.2.3
+        package-name: MyPackage 👈🏻 # Required input
+        version: 1.2.3 👈🏻 # Required input
+        fail-when-not-found: true 👈🏻 # Optional input
 
     - name: Print Output Result #PowerShell Core
       shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on Ubuntu
@@ -66,25 +61,12 @@ jobs:
         }
 ```
 
-<div align="left">
-<a href="#examples">More Examples Below!! 👇🏼</a>
-</div>
-
----
-
-<div align="center"><h2 style="font-weight:bold">What does it do?</h2></div>
-
-It is simple!  It goes out to [nuget.org](https://www.nuget.org) and checks to see if a NuGet package of a particular version exists.  If it does, it returns and output value of `"true"`, if not, then it returns `"false"`.
-Thats it!!
-
 ---
 
 <div align="center">
 
-## **Action Inputs**
+## **➡️ Action Inputs ⬅️**
 </div>
-
-TODO: Show action inputs in table
 
 | Input Name | Description                                                                | Required | Default Value |
 |---|:---------------------------------------------------------------------------|:---:|:---:|
@@ -92,49 +74,41 @@ TODO: Show action inputs in table
 | `version` | The version of the package.                                                | yes | N/A |
 | `fail-when-not-found` | Will fail the job if the NuGet package of a specific version is not found. | no | false |
 
----
-
-<div align="center" style="font-weight:bold">
-
-## **Examples**
-</div>
-
 <div align="center">
-
-### **Fail the job if the package is not found**
-</div>
-
-``` yaml
-- name: Check If Nuget Package Exists
-  uses: KinsonDigital/GotNuget@v1.0.0-preview.1
-  with:
-    package-name: MyPackage
-    version: 100.20.3
-    fail-when-not-found: true
-```
 
 ---
 
+## **⬅️ Action Output ➡️**
+</div>
+
+The name of the output is `nuget-exists` and it returns a `boolean` of `true` or `false`.
+Refer to the **Example** above for how to use the output of the action.
+
+---
+
+<h2 style="font-weight:bold;" align="center">🙏🏼 Contributing 🙏🏼</h2>
+
+Interested in contributing? If so, click [here](https://github.com/KinsonDigital/.github/blob/master/docs/CONTRIBUTING.md) to learn how to contribute your time or [here](https://github.com/sponsors/KinsonDigital) if you are interested in contributing your funds via one-time or recurring donation.
+
 <div align="center">
 
-## **Other Info**
+## **🔧 Maintainers 🔧**
 </div>
 
-<div align="left">
+  [![twitter-logo](https://raw.githubusercontent.com/KinsonDigital/.github/master/Images/twitter-logo-16x16.svg)Calvin Wilkinson](https://twitter.com/KDCoder) (KinsonDigital GitHub Organization - Owner)
+  
+  [![twitter-logo](https://raw.githubusercontent.com/KinsonDigital/.github/master/Images/twitter-logo-16x16.svg)Kristen Wilkinson](https://twitter.com/kswilky) (KinsonDigital GitHub Organization - Project Management, Documentation, Tester)
+ 
+<br>
 
-### License
-- [MIT License - GotNuget](https://github.com/KinsonDigital/GotNuget/blob/preview/v1.0.0-preview.1/LICENSE)
+<h2 style="font-weight:bold;" align="center">🚔 Licensing And Governance 🚔</h2>
+
+<div align="center">
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat)](https://github.com/KinsonDigital/.github/blob/master/docs/code_of_conduct.md)
+![GitHub](https://img.shields.io/github/license/kinsondigital/gotnuget)
 </div>
 
-<div align="left">
-
-### Maintainer
-</div>
-
-- [Calvin Wilkinson](https://github.com/CalvinWilkinson) (Owner and main contributor of the GitHub organization [KinsonDigital](https://github.com/KinsonDigital))
-  - [Got Nuget](https://github.com/KinsonDigital/GotNuget) is used in various projects for this organization with great success.
-- Click [here](https://github.com/KinsonDigital/GotNuget/issues/new/choose) to report any issues for this GitHub action!!
-
-<div align="right">
-<a href="#what-is-it">Back to the top!👆🏼</a>
-</div>
+This software is distributed under the very permissive [MIT license](https://github.com/KinsonDigital/GotNuget/blob/preview/v1.0.0-preview.1/LICENSE.md) and all dependencies are distributed under MIT-compatible licenses.
+This project has adopted the code of conduct defined by the **Contributor Covenant** to clarify expected behavior in our community.
+ 

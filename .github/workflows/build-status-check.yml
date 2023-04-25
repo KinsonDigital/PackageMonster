@@ -1,9 +1,14 @@
-name: ✔Build Status Check
+name: ✅Build Status Check
 
 
 env:
   PROJECT_NAME: GotNuget
-  NET_SDK_VERSION: 6.0.300
+  NET_SDK_VERSION: 7.x
+
+
+defaults:
+  run:
+    shell: pwsh
 
 
 on:
@@ -11,11 +16,11 @@ on:
 
 
 jobs:
-  Build_Status_Check:
+  build_status_check:
     name: Build Status Check
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Get Build Config
       id: get-build-config
@@ -28,7 +33,7 @@ jobs:
         }
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.NET_SDK_VERSION }}
 
