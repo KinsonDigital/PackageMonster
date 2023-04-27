@@ -2,7 +2,7 @@ name: ✅Build Status Check
 
 
 env:
-  PROJECT_NAME: GotNuget
+  PROJECT_NAME: PackageMonster
   NET_SDK_VERSION: 7.x
 
 
