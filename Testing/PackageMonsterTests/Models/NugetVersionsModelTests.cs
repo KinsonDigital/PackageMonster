@@ -2,11 +2,11 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-using FluentAssertions;
-using PackageMonster.Models;
-
 // ReSharper disable UseObjectOrCollectionInitializer
 namespace PackageMonsterTests.Models;
+
+using FluentAssertions;
+using PackageMonster.Models;
 
 /// <summary>
 /// Tests the <see cref="NugetVersionsModel"/> class.

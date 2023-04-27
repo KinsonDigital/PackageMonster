@@ -2,10 +2,10 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-using PackageMonster.Exceptions;
-using PackageMonster.Services;
-
 namespace PackageMonster;
+
+using Exceptions;
+using Services;
 
 /// <inheritdoc/>
 public sealed class GitHubAction : IGitHubAction

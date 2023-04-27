@@ -2,11 +2,11 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+namespace PackageMonsterTests.Helpers;
+
 using System.Reflection;
 using CommandLine;
 using Xunit.Sdk;
-
-namespace PackageMonsterTests.Helpers;
 
 /// <summary>
 /// Provides extension/helper methods to assist in unit testing.

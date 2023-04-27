@@ -2,9 +2,9 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace PackageMonsterTests.Guards;
-
 using System.Runtime.CompilerServices;
+
+namespace PackageMonsterTests.Guards;
 
 /// <summary>
 /// Performs analysis on particular values to ensure that they meet a criteria,

@@ -2,10 +2,10 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+namespace PackageMonsterTests.Exceptions;
+
 using FluentAssertions;
 using PackageMonster.Exceptions;
-
-namespace PackageMonsterTests.Exceptions;
 
 /// <summary>
 /// Tests the <see cref="NugetNotFoundException"/> class.

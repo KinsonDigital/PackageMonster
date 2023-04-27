@@ -2,14 +2,14 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+namespace PackageMonsterTests;
+
 using FluentAssertions;
 using Moq;
 using PackageMonster;
 using PackageMonster.Exceptions;
 using PackageMonster.Services;
 using PackageMonsterTests.Helpers;
-
-namespace PackageMonsterTests;
 
 public class GitHubActionTests
 {

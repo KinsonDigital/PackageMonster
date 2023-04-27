@@ -2,14 +2,14 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+// ReSharper disable UseObjectOrCollectionInitializer
+// ReSharper disable PossibleMultipleEnumeration
+namespace PackageMonsterTests;
+
 using CommandLine;
 using FluentAssertions;
 using PackageMonster;
 using PackageMonsterTests.Helpers;
-
-// ReSharper disable UseObjectOrCollectionInitializer
-// ReSharper disable PossibleMultipleEnumeration
-namespace PackageMonsterTests;
 
 /// <summary>
 /// Tests the <see cref="ActionInputs"/> class.

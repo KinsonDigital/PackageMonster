@@ -2,10 +2,10 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+namespace PackageMonsterTests.Helpers;
+
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
-namespace PackageMonsterTests.Helpers;
 
 /// <summary>
 /// Loads test data for testing purposes.

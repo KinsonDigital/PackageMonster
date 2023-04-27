@@ -2,12 +2,12 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+namespace PackageMonster.Services;
+
 using System.IO.Abstractions;
 using System.Text;
-using PackageMonster.Exceptions;
-using PackageMonster.Guards;
-
-namespace PackageMonster.Services;
+using Exceptions;
+using Guards;
 
 /// <inheritdoc/>
 public class ActionOutputService : IActionOutputService
