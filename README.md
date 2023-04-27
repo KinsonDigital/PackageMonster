@@ -1,11 +1,17 @@
+<div align="center">
+    <a href="#"><img align="center" src="https://raw.githubusercontent.com/KinsonDigital/PackageMonster/master/Documentation/Images/pkc-monster-logo.png" height="96"></a>
+    <br />
+
+</div>
+
 <h1 align="center">
 
-**Got Nuget?🍫**
+**Package Monster**
 </h1>
 
 <div align="center">
 
-[![Good First GitHub Issues](https://img.shields.io/github/issues/kinsondigital/GotNuget/good%20first%20issue?color=7057ff&label=Good%20First%20Issues)](https://github.com/KinsonDigital/GotNuget/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+[![Good First GitHub Issues](https://img.shields.io/github/issues/kinsondigital/PackageMonster/good%20first%20issue?color=7057ff&label=Good%20First%20Issues)](https://github.com/KinsonDigital/PackageMonster/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 [![Discord](https://img.shields.io/discord/481597721199902720?color=%23575CCB&label=chat%20on%20discord&logo=discord&logoColor=white)](https://discord.gg/qewu6fNgv7)
 </div>
 
@@ -26,21 +32,21 @@
 <div align="center"><h2 style="font-weight:bold">🪧 Example 🪧</h2></div>
 
 ```yaml
-name: GotNuget Action Sample
+name: Package Monster Action Sample
 
 on:
   workflow_dispatch:
 
 jobs:
   Test_Action:em
-    name: Test GotNuget GitHub Action
+    name: Test Package Monster GitHub Action
     runs-on: ubuntu-latest 👈🏼 # Required (Refer to the note above)
     steps:
     - uses: actions/checkout@v3
 
     - name: Check If Nuget Package Exists
       id: nuget-exists
-      uses: KinsonDigital/GotNuget@v1.0.0-preview.1
+      uses: KinsonDigital/PackageMonster@v1.0.0-preview.1
       with:
         package-name: MyPackage 👈🏻 # Required input
         version: 1.2.3 👈🏻 # Required input
@@ -49,7 +55,7 @@ jobs:
     - name: Print Output Result #PowerShell Core
       shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on Ubuntu
       run: |
-        #        Output name for the GotNuget GitHub action 👇🏼
+        #        Output name for the Package Monster GitHub action 👇🏼
         #                                               _____|_____
         #                                              |          |
         $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
@@ -106,9 +112,9 @@ Interested in contributing? If so, click [here](https://github.com/KinsonDigital
 <div align="center">
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat)](https://github.com/KinsonDigital/.github/blob/master/docs/code_of_conduct.md)
-![GitHub](https://img.shields.io/github/license/kinsondigital/gotnuget)
+![GitHub](https://img.shields.io/github/license/kinsondigital/packagemonster)
 </div>
 
-This software is distributed under the very permissive [MIT license](https://github.com/KinsonDigital/GotNuget/blob/preview/v1.0.0-preview.1/LICENSE.md) and all dependencies are distributed under MIT-compatible licenses.
+This software is distributed under the very permissive [MIT license](https://github.com/KinsonDigital/PackageMonster/blob/preview/v1.0.0-preview.1/LICENSE.md) and all dependencies are distributed under MIT-compatible licenses.
 This project has adopted the code of conduct defined by the **Contributor Covenant** to clarify expected behavior in our community.
  
