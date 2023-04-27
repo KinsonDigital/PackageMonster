@@ -60,6 +60,7 @@ public void Ctor_WithNull$PARAM_1$Param_ThrowsException()
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=633008B03E709644959B1F0C1F834490/Field/=PARAM_005F1/@KeyIndexDefined">True</s:Boolean>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=633008B03E709644959B1F0C1F834490/Field/=PARAM_005F1/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=633008B03E709644959B1F0C1F834490/Field/=PARAM_005F2/@KeyIndexDefined">False</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=csharpsquid/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=endgroup/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=IXML/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Kinson/@EntryIndexedValue">True</s:Boolean>

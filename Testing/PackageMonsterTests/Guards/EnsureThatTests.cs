@@ -2,42 +2,45 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-using System.Runtime.CompilerServices;
+using System.Diagnostics.CodeAnalysis;
+using FluentAssertions;
+using PackageMonster.Guards;
 
 namespace PackageMonsterTests.Guards;
 
 /// <summary>
-/// Performs analysis on particular values to ensure that they meet a criteria,
-/// then invokes behavior based on a result.
+/// Holds tests for the <see cref="EnsureThatTests"/> class.
 /// </summary>
-internal static class EnsureThat
+public class EnsureThatTests
 {
-    /// <summary>
-    /// Throws an <see cref="ArgumentNullException"/> if the given <paramref name="value"/> is null.
-    /// </summary>
-    /// <param name="value">The value to check.</param>
-    /// <param name="paramName">The name of the parameter being checked.</param>
-    /// <typeparam name="T">The class restricted type of the value.</typeparam>
-    /// <remarks>
-    /// <para>
-    ///     This method is intended to have the value <paramref name="paramName"/> to be the
-    ///     name of the item that is null.
-    /// </para>
-    /// <para>
-    ///     Example:  A parameter being injected into a constructor.
-    /// </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    ///     Thrown if <paramref name="value"/> is null.
-    /// </exception>
-    public static void CtorParamIsNotNull<T>(
-        T? value,
-        [CallerArgumentExpression("value")] string paramName = "")
-        where T : class
+    #region Method Tests
+    [Fact]
+    [SuppressMessage("csharpsquid", "S3236", Justification = "Explicit on purpose for testing.")]
+    public void CtorParamIsNotNull_WithNullValue_ThrowsException()
     {
-        if (value is null)
-        {
-            throw new ArgumentNullException(paramName, "The parameter must not be null.");
-        }
+        // Arrange
+        string? testValue = null;
+
+        // Act
+        var act = () => EnsureThat.CtorParamIsNotNull(testValue, nameof(testValue));
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>()
+            .WithMessage("The parameter must not be null. (Parameter 'testValue')");
     }
+
+    [Fact]
+    [SuppressMessage("csharpsquid", "S3236", Justification = "Explicit on purpose for testing.")]
+    public void CtorParamIsNotNull_WhenValueIsNotNull_DoesNotThrowException()
+    {
+        // Arrange
+        const string testValue = "test-value";
+
+        // Act
+        var act = () => EnsureThat.CtorParamIsNotNull(testValue, nameof(testValue));
+
+        // Assert
+        act.Should().NotThrow();
+    }
+    #endregion
 }
