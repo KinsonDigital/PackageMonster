@@ -2,13 +2,13 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNugetTests.Services;
+namespace PackageMonsterTests.Services;
 
 using System.IO.Abstractions;
 using FluentAssertions;
-using GotNuget.Exceptions;
-using GotNuget.Services;
-using GotNugetTests.Helpers;
+using PackageMonster.Exceptions;
+using PackageMonster.Services;
+using PackageMonsterTests.Helpers;
 using Moq;
 
 public class ActionOutputServiceTests

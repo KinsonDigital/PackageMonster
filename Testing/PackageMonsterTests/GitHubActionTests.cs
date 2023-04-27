@@ -3,13 +3,13 @@
 // </copyright>
 
 using FluentAssertions;
-using GotNuget;
-using GotNuget.Exceptions;
-using GotNuget.Services;
-using GotNugetTests.Helpers;
 using Moq;
+using PackageMonster;
+using PackageMonster.Exceptions;
+using PackageMonster.Services;
+using PackageMonsterTests.Helpers;
 
-namespace GotNugetTests;
+namespace PackageMonsterTests;
 
 public class GitHubActionTests
 {

@@ -5,7 +5,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace GotNugetTests.Helpers;
+namespace PackageMonsterTests.Helpers;
 
 /// <summary>
 /// Loads test data for testing purposes.

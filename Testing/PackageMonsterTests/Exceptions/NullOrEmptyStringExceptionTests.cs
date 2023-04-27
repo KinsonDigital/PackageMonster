@@ -3,9 +3,9 @@
 // </copyright>
 
 using FluentAssertions;
-using GotNuget.Exceptions;
+using PackageMonster.Exceptions;
 
-namespace GotNugetTests.Exceptions;
+namespace PackageMonsterTests.Exceptions;
 
 /// <summary>
 /// Tests the <see cref="NullOrEmptyStringException"/> class.

@@ -4,10 +4,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using GotNuget.Models;
+using PackageMonster.Models;
 using RestSharp;
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 /// <inheritdoc />
 [ExcludeFromCodeCoverage]

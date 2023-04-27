@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 /// <summary>
 /// Provides access to data from nuget.org marketplace.

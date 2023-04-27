@@ -4,9 +4,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using GotNuget.Services;
+using PackageMonster.Services;
 
-namespace GotNuget;
+namespace PackageMonster;
 
 /// <summary>
 /// The main application.

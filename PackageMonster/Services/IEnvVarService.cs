@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 /// <summary>
 /// Provides the ability to deal with environment variables in the operating system.

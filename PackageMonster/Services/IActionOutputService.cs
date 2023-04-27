@@ -2,9 +2,9 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-using GotNuget.Exceptions;
+using PackageMonster.Exceptions;
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 /// <summary>
 /// Provides the ability to set the GitHub action output.

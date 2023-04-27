@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 using System.Diagnostics.CodeAnalysis;
 

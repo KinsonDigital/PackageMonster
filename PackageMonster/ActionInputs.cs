@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget;
+namespace PackageMonster;
 
 /// <summary>
 /// Holds all of the GitHub actions inputs.

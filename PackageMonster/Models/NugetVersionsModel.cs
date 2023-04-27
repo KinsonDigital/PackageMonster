@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Models;
+namespace PackageMonster.Models;
 
 /// <summary>
 /// Holds information about a NuGet package.

@@ -3,10 +3,10 @@
 // </copyright>
 
 using FluentAssertions;
-using GotNuget.Models;
+using PackageMonster.Models;
 
 // ReSharper disable UseObjectOrCollectionInitializer
-namespace GotNugetTests.Models;
+namespace PackageMonsterTests.Models;
 
 /// <summary>
 /// Tests the <see cref="NugetVersionsModel"/> class.

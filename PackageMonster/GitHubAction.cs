@@ -2,10 +2,10 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-using GotNuget.Exceptions;
-using GotNuget.Services;
+using PackageMonster.Exceptions;
+using PackageMonster.Services;
 
-namespace GotNuget;
+namespace PackageMonster;
 
 /// <inheritdoc/>
 public sealed class GitHubAction : IGitHubAction

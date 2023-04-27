@@ -4,7 +4,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 /// <inheritdoc/>
 [ExcludeFromCodeCoverage]

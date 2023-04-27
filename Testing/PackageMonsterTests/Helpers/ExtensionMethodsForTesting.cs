@@ -6,7 +6,7 @@ using System.Reflection;
 using CommandLine;
 using Xunit.Sdk;
 
-namespace GotNugetTests.Helpers;
+namespace PackageMonsterTests.Helpers;
 
 /// <summary>
 /// Provides extension/helper methods to assist in unit testing.

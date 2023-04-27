@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Exceptions;
+namespace PackageMonster.Exceptions;
 
 /// <summary>
 /// Occurs when a NuGet package is not found.

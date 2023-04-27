@@ -4,10 +4,10 @@
 
 using System.IO.Abstractions;
 using System.Text;
-using GotNuget.Exceptions;
-using GotNuget.Guards;
+using PackageMonster.Exceptions;
+using PackageMonster.Guards;
 
-namespace GotNuget.Services;
+namespace PackageMonster.Services;
 
 /// <inheritdoc/>
 public class ActionOutputService : IActionOutputService

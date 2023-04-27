@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Guards;
+namespace PackageMonster.Guards;
 
 using System.Runtime.CompilerServices;
 

@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNuget.Exceptions;
+namespace PackageMonster.Exceptions;
 
 /// <summary>
 /// Occurs when a string is null or empty.

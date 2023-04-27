@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace GotNugetTests.Guards;
+namespace PackageMonsterTests.Guards;
 
 using System.Runtime.CompilerServices;
 

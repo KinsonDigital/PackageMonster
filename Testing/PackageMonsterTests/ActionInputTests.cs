@@ -4,12 +4,12 @@
 
 using CommandLine;
 using FluentAssertions;
-using GotNuget;
-using GotNugetTests.Helpers;
+using PackageMonster;
+using PackageMonsterTests.Helpers;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 // ReSharper disable PossibleMultipleEnumeration
-namespace GotNugetTests;
+namespace PackageMonsterTests;
 
 /// <summary>
 /// Tests the <see cref="ActionInputs"/> class.
