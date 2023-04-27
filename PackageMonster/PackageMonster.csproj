@@ -6,7 +6,6 @@
     <LangVersion>11.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>GotNuget</RootNamespace>
 
     <!--Update this for production and preview releases-->
     <Version>0.1.0</Version>

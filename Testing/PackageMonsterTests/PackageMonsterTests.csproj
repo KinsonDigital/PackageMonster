@@ -6,7 +6,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
-        <RootNamespace>GotNugetTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -47,7 +46,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\GotNuget\GotNuget.csproj" />
+      <ProjectReference Include="..\..\PackageMonster\PackageMonster.csproj" />
     </ItemGroup>
 
     <ItemGroup>
