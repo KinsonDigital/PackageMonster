@@ -1,4 +1,4 @@
-name: 'GotNuget'
+name: 'PackageMonster'
 description: 'Checks if a NuGet package exists in the nuget.org public repository.'
 author: 'Calvin Wilkinson (KinsonDigital)'
 branding:

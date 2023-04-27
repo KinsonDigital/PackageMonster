@@ -5,16 +5,16 @@ coverage:
         # basic
         target: auto
         threshold: 85%
-        base: auto 
-        flags: 
+        base: auto
+        flags:
           - unit
-        paths: 
-          - "GotNuget"
+        paths:
+          - "PackageMonster"
       #  # advanced settings
-      #   branches: 
+      #   branches:
       #     - master
       #     - develop
-      #     - 
+      #     -
         if_ci_failed: error #success, failure, error, ignore
         informational: false
         only_pulls: false

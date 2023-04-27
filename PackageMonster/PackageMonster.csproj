@@ -15,7 +15,7 @@
 
     <Authors>Calvin Wilkinson</Authors>
     <Company>Kinson Digital</Company>
-    <Product>GotNuget</Product>
+    <Product>PackageMonster</Product>
     <Description>Custom GitHub action used to check if nuget.org contains a NuGet package of a particular version.</Description>
     <Copyright>Copyright ©2023 Kinson Digital</Copyright>
   </PropertyGroup>

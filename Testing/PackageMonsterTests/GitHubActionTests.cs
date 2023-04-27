@@ -38,7 +38,7 @@ public class GitHubActionTests
         await action.Run(inputs, () => { }, _ => { });
 
         // Assert
-        this.mockConsoleService.VerifyOnce(m => m.WriteLine("Welcome To The GotNuget GitHub Action!! 🍫"));
+        this.mockConsoleService.VerifyOnce(m => m.WriteLine("Welcome To The PackageMonster GitHub Action!!"));
         this.mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(2));
     }
 
