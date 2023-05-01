@@ -1,5 +1,3 @@
-import { RunnerService } from "./RunnerService.ts";
-
 // Validate the arguments
 if (Deno.args.length !== 2) {
     let errorMsg = "The 'validate-tag' cicd script must have two arguments.";
@@ -39,17 +37,11 @@ if (isValid === false) {
     throw new Error(`The tag is not in the correct ${tagType} version syntax.`);
 }
 
-const runnerService: RunnerService = new RunnerService();
-const result: [boolean, string] = await runnerService.run(["git", "tag"]);
+const tagsUrl = "https://api.github.com/repos/KinsonDigital/PackageMonster/tags";
+const response = await fetch(tagsUrl);
+const responseData = <{ name: ""}[]>await response.json();
 
-if (result[0] === false) {
-    let errorMsg = "The command 'git tag' failed.";
-    errorMsg += `\n${result[1]}`;
-
-    throw new Error(errorMsg);
-}
-
-const tags: string[] = result[1].split("\n");
+const tags: string[] = responseData.map((tagObj) => tagObj.name);
 
 const tagExists: boolean = tags.some(t => t === tag);
 
