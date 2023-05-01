@@ -28,7 +28,7 @@ jobs:
         $branch = "${{ github.ref }}";
 
         if ($branch -ne "refs/heads/master") {
-          Write-Host "::error::Release workflow can only run on the $branch branch";
+          Write-Host "::error::Release workflow can only run on the master branch";
           exit 1;
         }
 
