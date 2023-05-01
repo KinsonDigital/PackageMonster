@@ -21,7 +21,12 @@ if (tagType !== "production" && tagType !== "preview") {
 const prodVersionRegex = /^v[0-9]+\.[0-9]+\.[0-9]+$/;
 const prevVersionRegex = /^v[0-9]+\.[0-9]+\.[0-9]+-preview\.[0-9]+$/;
 
-const tag: string = Deno.args[1];
+let tag: string = Deno.args[1];
+
+tag = tag.startsWith("v")
+    ? tag
+    : `v${tag}`;
+
 let isValid = false;
 
 if (tagType === "production") {
