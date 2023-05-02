@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Validate Tag (DEBUG)",
+            "request": "launch",
+            "type": "node",
+            "program": "${workspaceFolder}/.github/cicd/validate-tag.ts",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [
+                "run",
+                "--inspect-wait",
+                "--allow-all"
+            ],
+            "args": ["Preview", "1.0.0-preview.1", "PackageMonster"],
+            "attachSimplePort": 9229,
+            "console": "integratedTerminal",
+            "windows": {
+                "runtimeExecutable": "${userHome}\\.deno\\bin\\deno.exe",
+            },
+            "linux": {
+                "runtimeExecutable": "${userHome}/.deno/bin/deno",
+            },
+        }
+    ]
+}
