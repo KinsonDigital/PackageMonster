@@ -1,5 +1,5 @@
 // Validate the arguments
-if (Deno.args.length !== 2) {
+if (Deno.args.length !== 3) {
     let errorMsg = "The 'validate-tag' cicd script must have two arguments.";
     errorMsg += "\nThe first arg must be either 'production' or 'preview'.";
     errorMsg += "\nThe second arg must be the name of the tag.";
@@ -15,6 +15,8 @@ if (tagType !== "production" && tagType !== "preview") {
 
     throw new Error(errorMsg);
 }
+
+const projectName: string = Deno.args[2];
 
 const prodVersionRegex = /^v[0-9]+\.[0-9]+\.[0-9]+$/;
 const prevVersionRegex = /^v[0-9]+\.[0-9]+\.[0-9]+-preview\.[0-9]+$/;
@@ -37,7 +39,7 @@ if (isValid === false) {
     throw new Error(`The tag is not in the correct ${tagType} version syntax.`);
 }
 
-const tagsUrl = "https://api.github.com/repos/KinsonDigital/PackageMonster/tags";
+const tagsUrl = `https://api.github.com/repos/KinsonDigital/${projectName}/tags`;
 const response = await fetch(tagsUrl);
 const responseData = <{ name: ""}[]>await response.json();
 
