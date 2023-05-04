@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Validate Tag (DEBUG)",
+            "name": "Validate Prod Tag (DEBUG)",
             "request": "launch",
             "type": "node",
             "program": "${workspaceFolder}/.github/cicd/validate-tag.ts",
@@ -15,7 +15,49 @@
                 "--inspect-wait",
                 "--allow-all"
             ],
-            "args": ["Preview", "1.0.0-preview.1", "PackageMonster"],
+            "args": ["Production", "v1.2.3", "PackageMonster"],
+            "attachSimplePort": 9229,
+            "console": "integratedTerminal",
+            "windows": {
+                "runtimeExecutable": "${userHome}\\.deno\\bin\\deno.exe",
+            },
+            "linux": {
+                "runtimeExecutable": "${userHome}/.deno/bin/deno",
+            },
+        },
+        {
+            "name": "Validate Preview Tag (DEBUG)",
+            "request": "launch",
+            "type": "node",
+            "program": "${workspaceFolder}/.github/cicd/validate-tag.ts",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [
+                "run",
+                "--inspect-wait",
+                "--allow-all"
+            ],
+            "args": ["Preview", "v1.2.3-preview.5", "PackageMonster"],
+            "attachSimplePort": 9229,
+            "console": "integratedTerminal",
+            "windows": {
+                "runtimeExecutable": "${userHome}\\.deno\\bin\\deno.exe",
+            },
+            "linux": {
+                "runtimeExecutable": "${userHome}/.deno/bin/deno",
+            },
+        },        
+        {
+            "name": "Validate Either Tag (DEBUG)",
+            "request": "launch",
+            "type": "node",
+            "program": "${workspaceFolder}/.github/cicd/validate-tag.ts",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [
+                "run",
+                "--inspect-wait",
+                "--allow-all"
+            ],
+            "args": ["Either", "v1.2.3", "PackageMonster"],
             "attachSimplePort": 9229,
             "console": "integratedTerminal",
             "windows": {
