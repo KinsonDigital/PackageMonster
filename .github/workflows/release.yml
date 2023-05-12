@@ -68,7 +68,7 @@ jobs:
         deno run `
           --allow-run `
           --allow-net `
-          "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-tag.ts`
+          https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-tag.ts `
           "${{ inputs.release_type }}" `
           "v${{ steps.get-version.outputs.version }}" `
           "${{ env.project-name }}";
@@ -77,7 +77,7 @@ jobs:
       run: |
         deno run `
           --allow-read `
-          "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-notes.ts `
+          https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-notes.ts `
           "${{ inputs.release_type }}" `
           "v${{ steps.get-version.outputs.version }}";
           
