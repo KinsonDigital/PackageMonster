@@ -74,7 +74,13 @@ jobs:
           "${{ env.project-name }}";
 
     - name: Validate Release Notes
-      run: deno run --allow-read "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-notes.ts`
+      run: 
+        deno run `
+        --allow-read `
+          "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-notes.ts `
+          "${{ inputs.release_type }}" `
+          "v${{ steps.get-version.outputs.version }}";
+          
     - name: Preview Release
       uses: softprops/action-gh-release@v1
       if: inputs.release_type == 'Preview'
