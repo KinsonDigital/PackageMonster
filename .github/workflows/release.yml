@@ -76,7 +76,7 @@ jobs:
     - name: Validate Release Notes
       run: |
         deno run `
-        --allow-read `
+          --allow-read `
           "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-notes.ts `
           "${{ inputs.release_type }}" `
           "v${{ steps.get-version.outputs.version }}";
