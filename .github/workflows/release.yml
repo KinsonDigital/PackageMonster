@@ -68,14 +68,13 @@ jobs:
         deno run `
           --allow-run `
           --allow-net `
-          "${{ github.workspace }}/.github/cicd/validate-tag.ts" `
+          "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-tag.ts`
           "${{ inputs.release_type }}" `
           "v${{ steps.get-version.outputs.version }}" `
           "${{ env.project-name }}";
 
     - name: Validate Release Notes
-      run: deno run --allow-read "${{ github.workspace }}/.github/cicd/validate-notes.ts" "${{ inputs.release_type }}" "v${{ steps.get-version.outputs.version }}";
-
+      run: deno run --allow-read "${{ github.workspace }}https://raw.githubusercontent.com/KinsonDigital/Infrastructure/v3.0.3/cicd/validate-notes.ts`
     - name: Preview Release
       uses: softprops/action-gh-release@v1
       if: inputs.release_type == 'Preview'
