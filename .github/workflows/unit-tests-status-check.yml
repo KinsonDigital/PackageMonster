@@ -14,8 +14,10 @@ defaults:
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - master
+    branches: master
+    paths:
+      - "**.cs"
+      - "**.csproj"
 
 jobs:
   unit_testing_status_check:
@@ -30,7 +32,7 @@ jobs:
         # If the destination branch that the pull request is merging into is master, do a release build
         if ( "${{ github.base_ref }}" -eq "master") {
           "build-config=Release" >> "$env:GITHUB_OUTPUT";
-          } else { # Any other branch than master, do a debug build
+        } else { # Any other branch than master, do a debug build
           "build-config=Debug" >> "$env:GITHUB_OUTPUT";
         }
 
