@@ -42,7 +42,7 @@ public class ActionOutputService : IActionOutputService
 
         if (string.IsNullOrEmpty(outputPath))
         {
-            Console.WriteLine("WARNING: The GitHub output environment file was not specified.");
+            Console.WriteLine($"WARNING: The GitHub output environment file variable '{GitHubOutput}' was not specified.");
             return;
         }
 
