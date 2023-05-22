@@ -4,7 +4,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using PackageMonster.Models;
+using System.Text.Json.Nodes;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace PackageMonster.Services;
@@ -18,14 +19,15 @@ public sealed class NugetDataService : INugetDataService
      * 1. Package Content: https://docs.microsoft.com/en-us/nuget/api/package-base-address-resource
      * 2.Nuget Server API: https://docs.microsoft.com/en-us/nuget/api/overview
      */
-    private const string BaseUrl = "https://api.nuget.org";
+    internal const string PublicNugetApiUrl = "https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json";
+    internal const string PublicNugetVersionsJsonPath = "$.versions[*]";
     private readonly RestClient client;
     private bool isDisposed;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NugetDataService"/> class.
     /// </summary>
-    public NugetDataService() => this.client = new RestClient(BaseUrl);
+    public NugetDataService() => this.client = new RestClient(PublicNugetApiUrl);
 
     /// <inheritdoc />
     /// <remarks>
@@ -38,24 +40,49 @@ public sealed class NugetDataService : INugetDataService
     /// <exception cref="HttpRequestException">
     ///     Thrown if any HTTP based error occurs.
     /// </exception>
-    public async Task<string[]> GetNugetVersions(string packageName)
+    public async Task<string[]> GetNugetVersions(string packageName, string source, string versionsJsonPath)
     {
         if (string.IsNullOrEmpty(packageName))
         {
             throw new ArgumentNullException(nameof(packageName), $"Must provide a NuGet package name.");
         }
 
+        if (string.IsNullOrWhiteSpace(source))
+        {
+            source = PublicNugetApiUrl;
+        }
+
+        if (!Uri.IsWellFormedUriString(source, UriKind.Absolute))
+        {
+            throw new ArgumentException(nameof(source), $"Must provide a well-formed NuGet source URI.");
+        }
+
+        if (!Uri.TryCreate(source, UriKind.Absolute, out _))
+        {
+            throw new ArgumentException(nameof(source), $"Must provide an absolute NuGet source URI.");
+        }
+
+        if (string.IsNullOrWhiteSpace(versionsJsonPath))
+        {
+            versionsJsonPath = PublicNugetVersionsJsonPath;
+        }
+
         this.client.AcceptedContentTypes = new[] { "application/vnd.github.v3+json" };
+        
+        var resolvedUrl = source.Replace("PACKAGE-NAME", packageName);
+        var request = new RestRequest(resolvedUrl);
 
-        const string serviceIndexId = "v3-flatcontainer";
-        var fullUrl = $"{BaseUrl}/{serviceIndexId}/{packageName.ToLower()}/index.json";
-        var request = new RestRequest(fullUrl);
-
-        var response = await this.client.ExecuteAsync<NugetVersionsModel>(request, Method.Get);
+        var response = await this.client.ExecuteAsync(request, Method.Get);
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
-            return response.Data is null ? Array.Empty<string>() : response.Data.Versions.ToArray();
+            if (string.IsNullOrWhiteSpace(response.Content) || response.ContentLength == 0)
+            {
+                return Array.Empty<string>();
+            }
+
+            var json = JObject.Parse(response.Content);
+            return json.SelectTokens(versionsJsonPath).Select(t => t.Value<string>()).ToArray();
         }
 
         var exception = response.ErrorException ?? new Exception("There was an issue getting data from NuGet.");

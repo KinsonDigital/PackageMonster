@@ -14,6 +14,8 @@ public interface INugetDataService : IDisposable
     /// to nuget.org using the given <paramref name="packageName"/>.
     /// </summary>
     /// <param name="packageName">The name of the package.</param>
+    /// <param name="source">The nuget source.</param>
+    /// <param name="versionsJsonPath">The versions json path.</param>
     /// <returns>The list of versions that exist for the package.</returns>
-    Task<string[]> GetNugetVersions(string packageName);
+    Task<string[]> GetNugetVersions(string packageName, string source, string versionsJsonPath);
 }

@@ -3,13 +3,16 @@
 // </copyright>
 
 // ReSharper disable UseObjectOrCollectionInitializer
+
+using Newtonsoft.Json.Linq;
+using PackageMonster.Services;
+
 namespace PackageMonsterTests.Models;
 
 using FluentAssertions;
-using PackageMonster.Models;
 
 /// <summary>
-/// Tests the <see cref="NugetVersionsModel"/> class.
+/// Tests the versions Json Path functionality.
 /// </summary>
 public class NugetVersionsModelTests
 {
@@ -18,13 +21,13 @@ public class NugetVersionsModelTests
     public void Version_WhenSettingValue_ReturnsCorrectResult()
     {
         // Arrange
-        var model = new NugetVersionsModel();
+        var model = JObject.Parse(@"{ 'versions': [""1.2.3"", ""4.5.6""] }");
 
         // Act
-        model.Versions = new[] { "1.2.3", "4.5.6" };
+        var actual = model.SelectTokens(NugetDataService.PublicNugetVersionsJsonPath).Select(v => v.Value<string>()).ToArray();
 
         // Assert
-        model.Versions.Should()
+        actual.Should()
             .HaveCount(2)
             .And.Contain("1.2.3")
             .And.Contain("4.5.6")

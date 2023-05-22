@@ -2,6 +2,8 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+using PackageMonster.Services;
+
 namespace PackageMonster;
 
 /// <summary>
@@ -29,6 +31,24 @@ public class ActionInputs
         Required = true,
         HelpText = "The version of the NuGet package to check.  This is not case-sensitive.")]
     public string Version { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the NuGet repository.
+    /// </summary>
+    [Option(
+        "source",
+        Required = false,
+        HelpText = $"The source repository to check.  Defaults to `{NugetDataService.PublicNugetApiUrl}`.")]
+    public string Source { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the NuGet repository.
+    /// </summary>
+    [Option(
+        "versionsJsonPath",
+        Required = false,
+        HelpText = $"The json path to the versions.  Defaults to `{NugetDataService.PublicNugetVersionsJsonPath}`.")]
+    public string VersionsJsonPath { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets a value indicating whether or not the action will fail if the package was not found.

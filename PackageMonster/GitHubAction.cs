@@ -39,7 +39,7 @@ public sealed class GitHubAction : IGitHubAction
         try
         {
             this.gitHubConsoleService.Write($"Searching for package '{inputs.PackageName} v{inputs.Version}' . . . ");
-            var versions = await this.nugetDataService.GetNugetVersions(inputs.PackageName);
+            var versions = await this.nugetDataService.GetNugetVersions(inputs.PackageName, inputs.Source, inputs.VersionsJsonPath);
 
             var versionFound = versions
                 .Any(version =>

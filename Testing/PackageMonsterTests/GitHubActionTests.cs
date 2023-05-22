@@ -55,7 +55,7 @@ public class GitHubActionTests
         var expectedSearchMsgStart = $"Searching for package '{packageName} v{version}' . . . ";
         var expectedSearchMsgEnd = expectedOutput == "true" ? "package found!!" : "package not found!!";
 
-        this.mockDataService.Setup(m => m.GetNugetVersions(packageName))
+        this.mockDataService.Setup(m => m.GetNugetVersions(packageName, It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(new[] { "1.2.3", "4.5.6" });
         var onCompletedInvoked = false;
 
@@ -84,7 +84,7 @@ public class GitHubActionTests
         // Arrange
         var inputs = CreateInputs(failWhenNotFound: true);
 
-        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(Array.Empty<string>());
 
         var action = CreateAction();
@@ -106,7 +106,7 @@ public class GitHubActionTests
         // Arrange
         var inputs = CreateInputs(failWhenNotFound: failWhenNotFound);
 
-        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(Array.Empty<string>());
 
         var action = CreateAction();
@@ -123,8 +123,8 @@ public class GitHubActionTests
     public async void Run_WhenAnExceptionIsThrown_InvokesOnErrorActionParam()
     {
         // Arrange
-        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
-            .Callback<string>(_ => throw new Exception("test-exception"));
+        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            .Callback<string, string>((_, _) => throw new Exception("test-exception"));
         Exception? exception = null;
 
         var inputs = CreateInputs();
