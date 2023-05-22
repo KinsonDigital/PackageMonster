@@ -42,19 +42,21 @@ public class ActionOutputService : IActionOutputService
 
         if (this.file.Exists(outputPath) is false)
         {
-            throw new FileNotFoundException("The GitHub output environment file was not found.", outputPath);
+            Console.WriteLine($"WARNING: The GitHub output environment file '{outputPath}' was not found.", outputPath);
         }
-
-        var outputLines = this.file.ReadAllLines(outputPath).ToList();
-        outputLines.Add($"{name}={value}");
-
-        var fileContent = new StringBuilder();
-
-        foreach (var line in outputLines)
+        else
         {
-            fileContent.AppendLine(line);
-        }
+            var outputLines = this.file.ReadAllLines(outputPath).ToList();
+            outputLines.Add($"{name}={value}");
 
-        this.file.WriteAllText(outputPath, fileContent.ToString());
+            var fileContent = new StringBuilder();
+
+            foreach (var line in outputLines)
+            {
+                fileContent.AppendLine(line);
+            }
+
+            this.file.WriteAllText(outputPath, fileContent.ToString());
+        }
     }
 }
