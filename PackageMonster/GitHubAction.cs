@@ -65,7 +65,9 @@ public sealed class GitHubAction : IGitHubAction
                 {
                     throw new NugetNotFoundException(foundResultMsg);
                 }
-
+            }
+            else
+            {
                 if (inputs.FailWhenFound is true)
                 {
                     throw new NugetFoundException(foundResultMsg);
