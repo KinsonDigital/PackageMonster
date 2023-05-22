@@ -42,10 +42,10 @@ public class ActionInputs
     public string Source { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the NuGet repository.
+    /// Gets or sets the json path to extract the versions.
     /// </summary>
     [Option(
-        "versionsJsonPath",
+        "json-path",
         Required = false,
         HelpText = $"The json path to the versions.  Defaults to `{NugetDataService.PublicNugetVersionsJsonPath}`.")]
     public string VersionsJsonPath { get; set; } = string.Empty;

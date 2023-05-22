@@ -124,7 +124,7 @@ public class GitHubActionTests
     {
         // Arrange
         this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-            .Callback<string, string>((_, _) => throw new Exception("test-exception"));
+            .Callback<string, string, string>((_, _, _) => throw new Exception("test-exception"));
         Exception? exception = null;
 
         var inputs = CreateInputs();

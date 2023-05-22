@@ -29,5 +29,9 @@ runs:
   - ${{ inputs.package-name }}
   - '--version'
   - ${{ inputs.version }}
+  - '--source'
+  - ${{ inputs.source }}
+  - '--json-path'
+  - ${{ inputs.json-path }}
   - '--fail-when-not-found'
   - ${{ inputs.fail-when-not-found }}
