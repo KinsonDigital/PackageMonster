@@ -27,6 +27,7 @@ public static class Program
             {
                 services.AddSingleton<IAppService, AppService>();
                 services.AddSingleton<IGitHubConsoleService, GitHubConsoleService>();
+                services.AddSingleton<IEnvVarService, EnvVarService>();
                 services.AddSingleton<IActionOutputService, ActionOutputService>();
                 services.AddSingleton<IArgParsingService<ActionInputs>, ArgParsingService>();
                 services.AddSingleton<INugetDataService, NugetDataService>();
