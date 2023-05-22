@@ -31,6 +31,7 @@ public static class Program
                 services.AddSingleton<IEnvVarService, EnvVarService>();
                 services.AddSingleton<IActionOutputService, ActionOutputService>();
                 services.AddSingleton<IFile, FileWrapper>();
+                services.AddSingleton<IFileSystem, FileSystem>();
                 services.AddSingleton<IArgParsingService<ActionInputs>, ArgParsingService>();
                 services.AddSingleton<INugetDataService, NugetDataService>();
                 services.AddSingleton<IGitHubAction, GitHubAction>();
