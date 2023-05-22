@@ -67,7 +67,7 @@ public sealed class NugetDataService : INugetDataService
             versionsJsonPath = PublicNugetVersionsJsonPath;
         }
 
-        this.client.AcceptedContentTypes = new[] { "application/vnd.github.v3+json" };
+        this.client.AcceptedContentTypes = new[] { "application/json" };
         
         var resolvedUrl = source.Replace("PACKAGE-NAME", packageName);
         var request = new RestRequest(resolvedUrl);
