@@ -1,5 +1,5 @@
 name: 'PackageMonster'
-description: 'Checks if a NuGet package exists in the nuget.org public repository.'
+description: 'Checks if a package exists in the a public repository.'
 author: 'Calvin Wilkinson (KinsonDigital)'
 branding:
   icon: settings
@@ -9,7 +9,7 @@ inputs:
     description: 'The name of the package.  This is not case-sensitive.'
     required: true
   version:
-    description: 'The version of the NuGet package to check.  This is not case-sensitive.'
+    description: 'The version of the package to check.  This is not case-sensitive.'
     required: true
   source:
     description: 'The source repository to check.'
@@ -20,17 +20,17 @@ inputs:
     required: false
     default: $.versions[*]
   fail-when-not-found:
-    description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'
+    description: 'If true, will fail the workflow if the package of the requested version does not exist.'
     required: false
     default: false
   fail-when-found:
-    description: 'If true, will fail the workflow if the NuGet package of the requested version does exist.'
+    description: 'If true, will fail the workflow if the package of the requested version does exist.'
     required: false
     default: false
 
 outputs:
-  nuget-exists:
-    description: 'True if the NuGet package exists.'
+  result:
+    description: 'True if the package exists.'
 
 # These are the arguments that are passed into the console app
 runs:

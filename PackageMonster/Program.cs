@@ -33,7 +33,7 @@ public static class Program
                 services.AddSingleton<IFile, FileWrapper>();
                 services.AddSingleton<IFileSystem, FileSystem>();
                 services.AddSingleton<IArgParsingService<ActionInputs>, ArgParsingService>();
-                services.AddSingleton<INugetDataService, NugetDataService>();
+                services.AddSingleton<IDataService, DataService>();
                 services.AddSingleton<IGitHubAction, GitHubAction>();
             }).Build();
 

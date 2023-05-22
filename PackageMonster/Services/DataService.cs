@@ -1,10 +1,9 @@
-﻿// <copyright file="NugetDataService.cs" company="KinsonDigital">
+﻿// <copyright file="DataService.cs" company="KinsonDigital">
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using System.Text.Json.Nodes;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -12,12 +11,12 @@ namespace PackageMonster.Services;
 
 /// <inheritdoc />
 [ExcludeFromCodeCoverage]
-public sealed class NugetDataService : INugetDataService
+public sealed class DataService : IDataService
 {
     /* Resources:
-     * These links refer to the documentation for the NuGet API
+     * These links refer to the documentation for the Nuget API
      * 1. Package Content: https://docs.microsoft.com/en-us/nuget/api/package-base-address-resource
-     * 2.Nuget Server API: https://docs.microsoft.com/en-us/nuget/api/overview
+     * 2. Server API: https://docs.microsoft.com/en-us/nuget/api/overview
      */
     internal const string PublicNugetApiUrl = "https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json";
     internal const string PublicNugetVersionsJsonPath = "$.versions[*]";
@@ -25,13 +24,13 @@ public sealed class NugetDataService : INugetDataService
     private bool isDisposed;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="NugetDataService"/> class.
+    /// Initializes a new instance of the <see cref="DataService"/> class.
     /// </summary>
-    public NugetDataService() => this.client = new RestClient(PublicNugetApiUrl);
+    public DataService() => this.client = new RestClient();
 
     /// <inheritdoc />
     /// <remarks>
-    ///     The param <paramref name="packageName"/> is not case sensitive.  The NuGet API
+    ///     The param <paramref name="packageName"/> is not case sensitive.  The API
     ///     requires that it is in lowercase.  This is taken care of for you.
     /// </remarks>
     /// <exception cref="ArgumentNullException">
@@ -40,11 +39,11 @@ public sealed class NugetDataService : INugetDataService
     /// <exception cref="HttpRequestException">
     ///     Thrown if any HTTP based error occurs.
     /// </exception>
-    public async Task<string[]> GetNugetVersions(string packageName, string source, string versionsJsonPath)
+    public async Task<string[]> GetVersions(string packageName, string source, string versionsJsonPath)
     {
         if (string.IsNullOrEmpty(packageName))
         {
-            throw new ArgumentNullException(nameof(packageName), $"Must provide a NuGet package name.");
+            throw new ArgumentNullException(nameof(packageName), $"Must provide a package name.");
         }
 
         if (string.IsNullOrWhiteSpace(source))
@@ -54,12 +53,12 @@ public sealed class NugetDataService : INugetDataService
 
         if (!Uri.IsWellFormedUriString(source, UriKind.Absolute))
         {
-            throw new ArgumentException(nameof(source), $"Must provide a well-formed NuGet source URI.");
+            throw new ArgumentException(nameof(source), $"Must provide a well-formed source URI.");
         }
 
         if (!Uri.TryCreate(source, UriKind.Absolute, out _))
         {
-            throw new ArgumentException(nameof(source), $"Must provide an absolute NuGet source URI.");
+            throw new ArgumentException(nameof(source), $"Must provide an absolute source URI.");
         }
 
         if (string.IsNullOrWhiteSpace(versionsJsonPath))
@@ -85,7 +84,7 @@ public sealed class NugetDataService : INugetDataService
             return json.SelectTokens(versionsJsonPath).Select(t => t.Value<string>()).ToArray();
         }
 
-        var exception = response.ErrorException ?? new Exception("There was an issue getting data from NuGet.");
+        var exception = response.ErrorException ?? new Exception($"There was an issue getting data from '{source}'.");
 
         throw new HttpRequestException(
             exception.Message,

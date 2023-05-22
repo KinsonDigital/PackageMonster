@@ -1,4 +1,4 @@
-﻿// <copyright file="NugetVersionsModelTests.cs" company="KinsonDigital">
+﻿// <copyright file="PackageVersionsModelTests.cs" company="KinsonDigital">
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
@@ -14,7 +14,7 @@ using FluentAssertions;
 /// <summary>
 /// Tests the versions Json Path functionality.
 /// </summary>
-public class NugetVersionsModelTests
+public class PackageVersionsModelTests
 {
     #region Prop Tests
     [Fact]
@@ -24,7 +24,7 @@ public class NugetVersionsModelTests
         var model = JObject.Parse(@"{ 'versions': [""1.2.3"", ""4.5.6""] }");
 
         // Act
-        var actual = model.SelectTokens(NugetDataService.PublicNugetVersionsJsonPath).Select(v => v.Value<string>()).ToArray();
+        var actual = model.SelectTokens(DataService.PublicNugetVersionsJsonPath).Select(v => v.Value<string>()).ToArray();
 
         // Assert
         actual.Should()

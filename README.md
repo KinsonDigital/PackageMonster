@@ -20,7 +20,7 @@
 ## **🤷🏼‍♂️ What is it? 🤷🏼‍♂️**
 </div>
 
-### This GitHub action checks whether or not a NuGet package with a particular name and version exists in the public NuGet gallery package repository [nuget.org](https://www.nuget.org).
+### This GitHub action checks whether or not a package with a particular name and version exists in a public gallery package repository like [nuget.org](https://www.nuget.org).
 
 <br/>
 
@@ -44,7 +44,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Check If Nuget Package Exists
+    - name: Check If Package Exists
       id: nuget-exists
       uses: KinsonDigital/PackageMonster@v1.0.0-preview.1
       with:
@@ -61,9 +61,51 @@ jobs:
         $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
         
         if ($nugetExists -eq "true") {
-          Write-Host "The NuGet package exists!!";
+          Write-Host "The package exists!!";
         } else {
-          Write-Host "The NuGet package does not exist!!";
+          Write-Host "The package does not exist!!";
+        }
+```
+
+---
+
+<div align="center"><h2 style="font-weight:bold">🪧 Example 🪧</h2></div>
+
+```yaml
+name: Package Monster Action Sample
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Test_Action:em
+    name: Test Package Monster GitHub Action
+    runs-on: ubuntu-latest 👈🏼 # Required (Refer to the note above)
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check If NPM Package Exists
+      id: npm-exists
+      uses: KinsonDigital/PackageMonster@v1.0.0-preview.1
+      with:
+        package-name: MyPackage 👈🏻 # Required input
+        version: 1.2.3 👈🏻 # Required input
+        source: https://registry.npmjs.org/PACKAGE-NAME
+        json-path: $.versions[*].version
+        fail-when-not-found: true 👈🏻 # Optional input
+
+    - name: Print Output Result #PowerShell Core
+      shell: pwsh 👈🏼 # Must be explicit with the shell to use PowerShell on Ubuntu
+      run: |
+        #        Output name for the Package Monster GitHub action 👇🏼
+        #                                               _____|_____
+        #                                              |          |
+        $npmExists = "${{ steps.npm-exists.outputs.nuget-exists }}";
+        
+        if ($nugetExists -eq "true") {
+          Write-Host "The package exists!!";
+        } else {
+          Write-Host "The package does not exist!!";
         }
 ```
 
@@ -76,12 +118,12 @@ jobs:
 
 | Input Name | Description                                                                           | Required | Default Value |
 |---|:-----------------------------------------------------------------------------------------------|:---:|:---:|
-| `package-name` | The name of the NuGet package.                                                    | yes | N/A |
+| `package-name` | The name of the package.                                                    | yes | N/A |
 | `version` | The version of the package.                                                            | yes | N/A |
 | `source` | The source repository to check.                                                         | no | https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json |
 | `json-path` | The json path to extract the versions.                                               | no | $.versions[*] |
-| `fail-when-not-found` | Will fail the job if the NuGet package of a specific version is not found. | no | false |
-| `fail-when-found` | Will fail the job if the NuGet package of a specific version is found. | no | false |
+| `fail-when-not-found` | Will fail the job if the package of a specific version is not found. | no | false |
+| `fail-when-found` | Will fail the job if the package of a specific version is found.         | no | false |
 
 <div align="center">
 
@@ -90,7 +132,7 @@ jobs:
 ## **⬅️ Action Output ➡️**
 </div>
 
-The name of the output is `nuget-exists` and it returns a `boolean` of `true` or `false`.
+The name of the output is `result` and it returns a `boolean` of `true` or `false`.
 Refer to the **Example** above for how to use the output of the action.
 
 ---

@@ -11,7 +11,7 @@ LABEL repository="https://github.com/KinsonDigital/PackageMonster"
 LABEL homepage="https://github.com/KinsonDigital/PackageMonster"
 
 # Label as GitHub action
-LABEL com.github.actions.name="Got Nuget"
+LABEL com.github.actions.name="Got Package"
 
 # Relayer the .NET SDK, anew with the build output
 FROM mcr.microsoft.com/dotnet/sdk:7.0
