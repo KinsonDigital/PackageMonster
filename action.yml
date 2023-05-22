@@ -11,6 +11,14 @@ inputs:
   version:
     description: 'The version of the NuGet package to check.  This is not case-sensitive.'
     required: true
+  source:
+    description: 'The source repository to check.'
+    required: false
+    default: https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json
+  json-path:
+    description: 'The json path to extract the versions.'
+    required: false
+    default: $.versions[*]
   fail-when-not-found:
     description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'
     required: false
