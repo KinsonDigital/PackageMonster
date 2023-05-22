@@ -81,6 +81,7 @@ jobs:
 | `source` | The source repository to check.                                                         | no | https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json |
 | `json-path` | The json path to extract the versions.                                               | no | $.versions[*] |
 | `fail-when-not-found` | Will fail the job if the NuGet package of a specific version is not found. | no | false |
+| `fail-when-found` | Will fail the job if the NuGet package of a specific version is found. | no | false |
 
 <div align="center">
 

@@ -160,11 +160,13 @@ public class GitHubActionTests
     private static ActionInputs CreateInputs(
         string packageName = "test-package",
         string version = "1.2.3",
-        bool? failWhenNotFound = true) => new ()
+        bool? failWhenNotFound = true,
+        bool? failWhenFound = false) => new ()
     {
         PackageName = packageName,
         Version = version,
         FailWhenNotFound = failWhenNotFound,
+        FailWhenFound = failWhenFound
     };
 
     /// <summary>

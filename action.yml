@@ -23,6 +23,10 @@ inputs:
     description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'
     required: false
     default: false
+  fail-when-found:
+    description: 'If true, will fail the workflow if the NuGet package of the requested version does exist.'
+    required: false
+    default: false
 
 outputs:
   nuget-exists:
@@ -43,3 +47,5 @@ runs:
   - ${{ inputs.json-path }}
   - '--fail-when-not-found'
   - ${{ inputs.fail-when-not-found }}
+  - '--fail-when-found'
+  - ${{ inputs.fail-when-found }}

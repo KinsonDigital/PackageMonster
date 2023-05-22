@@ -38,6 +38,11 @@ public class ActionInputTests
         typeof(ActionInputs).GetProperty(nameof(ActionInputs.FailWhenNotFound)).Should().BeDecoratedWith<OptionAttribute>();
         inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.FailWhenNotFound))
             .AssertOptionAttrProps("fail-when-not-found", false, false, "If true, will fail the workflow if the NuGet package of the requested version does not exist.");
+        
+        inputs.PackageName.Should().BeEmpty();
+        typeof(ActionInputs).GetProperty(nameof(ActionInputs.FailWhenFound)).Should().BeDecoratedWith<OptionAttribute>();
+        inputs.GetAttrFromProp<OptionAttribute>(nameof(ActionInputs.FailWhenFound))
+            .AssertOptionAttrProps("fail-when-found", false, false, "If true, will fail the workflow if the NuGet package of the requested version does exist.");
     }
     #endregion
 }

@@ -59,4 +59,14 @@ public class ActionInputs
         Default = false,
         HelpText = "If true, will fail the workflow if the NuGet package of the requested version does not exist.")]
     public bool? FailWhenNotFound { get; set; }
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the action will fail if the package was found.
+    /// </summary>
+    [Option(
+        "fail-when-found",
+        Required = false,
+        Default = false,
+        HelpText = "If true, will fail the workflow if the NuGet package of the requested version does exist.")]
+    public bool? FailWhenFound { get; set; }
 }
