@@ -29,7 +29,7 @@ inputs:
     default: false
 
 outputs:
-  result:
+  package-exists:
     description: 'True if the package exists.'
 
 # These are the arguments that are passed into the console app

@@ -50,7 +50,7 @@ public sealed class GitHubAction : IGitHubAction
             this.gitHubConsoleService.WriteLine(searchEndMsg);
             this.gitHubConsoleService.BlankLine();
 
-            this.actionOutputService.SetOutputValue("result", versionFound.ToString().ToLower());
+            this.actionOutputService.SetOutputValue("package-exists", versionFound.ToString().ToLower());
 
             var emoji = inputs.FailWhenNotFound is false
                 ? "✅"
