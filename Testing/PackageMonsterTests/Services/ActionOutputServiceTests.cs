@@ -132,11 +132,9 @@ public class ActionOutputServiceTests
     public void SetOutputValue_WhenInvoked_SetsOutputValue()
     {
         // Arrange
-        var expected =
-            $"""
-            other-output=other-value
-            test-output=test-value{Environment.NewLine}
-            """;
+        var expected = @"other-output=other-value
+test-output=test-value
+".ReplaceLineEndings(Environment.NewLine);
 
         const string outputPath = "test-path";
         var lines = new[]
