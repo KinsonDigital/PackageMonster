@@ -15,19 +15,23 @@ public class ActionOutputService : IActionOutputService
     private const string GitHubOutput = "GITHUB_OUTPUT";
     private readonly IEnvVarService envVarService;
     private readonly IFile file;
+    private readonly IGitHubConsoleService consoleService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ActionOutputService"/> class.
     /// </summary>
     /// <param name="envVarService">Manages environment variables.</param>
     /// <param name="file">Manages files.</param>
-    public ActionOutputService(IEnvVarService envVarService, IFile file)
+    public ActionOutputService(IEnvVarService envVarService, IFile file, IGitHubConsoleService consoleService)
     {
         EnsureThat.CtorParamIsNotNull(envVarService);
         EnsureThat.CtorParamIsNotNull(file);
+        EnsureThat.CtorParamIsNotNull(consoleService);
 
         this.envVarService = envVarService;
         this.file = file;
+        this.consoleService = consoleService;
+
     }
 
     /// <inheritdoc/>
@@ -42,13 +46,13 @@ public class ActionOutputService : IActionOutputService
 
         if (string.IsNullOrEmpty(outputPath))
         {
-            Console.WriteLine($"WARNING: The GitHub output environment file variable '{GitHubOutput}' was not specified.");
+            this.consoleService.WriteLine($"WARNING: The environment variable '{GitHubOutput}' was not specified.");
             return;
         }
 
         if (this.file.Exists(outputPath) is false)
         {
-            throw new FileNotFoundException("The GitHub output environment file was not found.", outputPath);
+            throw new FileNotFoundException("The GitHub output file was not found.", outputPath);
         }
 
         var outputLines = this.file.ReadAllLines(outputPath).ToList();
