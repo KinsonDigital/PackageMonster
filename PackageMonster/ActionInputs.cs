@@ -38,7 +38,7 @@ public class ActionInputs
     [Option(
         "source",
         Required = false,
-        HelpText = $"The source repository to check.  Defaults to `{DataService.PublicNugetApiUrl}`.")]
+        HelpText = "The source repository to check.  Defaults to `nuget`.")]
     public string Source { get; set; } = string.Empty;
 
     /// <summary>
@@ -47,7 +47,7 @@ public class ActionInputs
     [Option(
         "json-path",
         Required = false,
-        HelpText = $"The json path to the versions.  Defaults to `{DataService.PublicNugetVersionsJsonPath}`.")]
+        HelpText = "The json path to the versions.")]
     public string VersionsJsonPath { get; set; } = string.Empty;
 
     /// <summary>

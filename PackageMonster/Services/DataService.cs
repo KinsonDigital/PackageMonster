@@ -5,6 +5,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using PackageMonster.Repositories;
 using RestSharp;
 
 namespace PackageMonster.Services;
@@ -13,13 +14,6 @@ namespace PackageMonster.Services;
 [ExcludeFromCodeCoverage]
 public sealed class DataService : IDataService
 {
-    /* Resources:
-     * These links refer to the documentation for the Nuget API
-     * 1. Package Content: https://docs.microsoft.com/en-us/nuget/api/package-base-address-resource
-     * 2. Server API: https://docs.microsoft.com/en-us/nuget/api/overview
-     */
-    internal const string PublicNugetApiUrl = "https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json";
-    internal const string PublicNugetVersionsJsonPath = "$.versions[*]";
     private readonly RestClient client;
     private bool isDisposed;
 
@@ -48,27 +42,42 @@ public sealed class DataService : IDataService
 
         if (string.IsNullOrWhiteSpace(source))
         {
-            source = PublicNugetApiUrl;
+            source = "nuget";
         }
 
-        if (!Uri.IsWellFormedUriString(source, UriKind.Absolute))
-        {
-            throw new ArgumentException(nameof(source), $"Must provide a well-formed source URI.");
-        }
+        IPackageRepository packageRepository;
 
-        if (!Uri.TryCreate(source, UriKind.Absolute, out _))
+        switch (source.ToLowerInvariant())
         {
-            throw new ArgumentException(nameof(source), $"Must provide an absolute source URI.");
-        }
+            case "nuget":
+                packageRepository = new NugetPackageRepository();
+                break;
+            case "npm":
+                packageRepository = new NpmPackageRepository();
+                break;
+            default:
+                if (!Uri.IsWellFormedUriString(source, UriKind.Absolute))
+                {
+                    throw new ArgumentException(nameof(source), $"Must provide a well-formed source URI.");
+                }
 
-        if (string.IsNullOrWhiteSpace(versionsJsonPath))
-        {
-            versionsJsonPath = PublicNugetVersionsJsonPath;
+                if (!Uri.TryCreate(source, UriKind.Absolute, out _))
+                {
+                    throw new ArgumentException(nameof(source), $"Must provide an absolute source URI.");
+                }
+
+                if (string.IsNullOrWhiteSpace(versionsJsonPath))
+                {
+                    throw new ArgumentException(nameof(versionsJsonPath), $"Must provide a json path for a custom source. Make sure the variable `PACKAGE-NAME` is in the url.");
+                }
+
+                packageRepository = new CustomPackageRepository { Url = source, JsonPath = versionsJsonPath };
+                break;
         }
 
         this.client.AcceptedContentTypes = new[] { "application/json" };
         
-        var resolvedUrl = source.Replace("PACKAGE-NAME", packageName);
+        var resolvedUrl = packageRepository.Url.Replace("PACKAGE-NAME", packageName);
         var request = new RestRequest(resolvedUrl);
 
         var response = await this.client.ExecuteAsync(request, Method.Get);
@@ -81,7 +90,7 @@ public sealed class DataService : IDataService
             }
 
             var json = JObject.Parse(response.Content);
-            return json.SelectTokens(versionsJsonPath).Select(t => t.Value<string>()).ToArray();
+            return json.SelectTokens(packageRepository.JsonPath).Select(t => t.Value<string>()).Cast<string>().ToArray();
         }
 
         var exception = response.ErrorException ?? new Exception($"There was an issue getting data from '{source}'.");

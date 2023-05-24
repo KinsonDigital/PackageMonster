@@ -5,6 +5,7 @@
 // ReSharper disable UseObjectOrCollectionInitializer
 
 using Newtonsoft.Json.Linq;
+using PackageMonster.Repositories;
 using PackageMonster.Services;
 
 namespace PackageMonsterTests.Models;
@@ -21,10 +22,11 @@ public class PackageVersionsModelTests
     public void Version_WhenSettingValue_ReturnsCorrectResult()
     {
         // Arrange
+        var packageRepository = new NugetPackageRepository();
         var model = JObject.Parse(@"{ 'versions': [""1.2.3"", ""4.5.6""] }");
 
         // Act
-        var actual = model.SelectTokens(DataService.PublicNugetVersionsJsonPath).Select(v => v.Value<string>()).ToArray();
+        var actual = model.SelectTokens(packageRepository.JsonPath).Select(v => v.Value<string>()).ToArray();
 
         // Assert
         actual.Should()

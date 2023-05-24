@@ -45,7 +45,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Check If Package Exists
-      id: nuget-exists
+      id: package-exists
       uses: KinsonDigital/PackageMonster@v1.0.0-preview.1
       with:
         package-name: MyPackage 👈🏻 # Required input
@@ -58,9 +58,9 @@ jobs:
         #        Output name for the Package Monster GitHub action 👇🏼
         #                                               _____|_____
         #                                              |          |
-        $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
+        $packageExists = "${{ steps.package-exists.outputs.package-exists }}";
         
-        if ($nugetExists -eq "true") {
+        if ($packageExists -eq "true") {
           Write-Host "The package exists!!";
         } else {
           Write-Host "The package does not exist!!";
@@ -85,13 +85,12 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Check If NPM Package Exists
-      id: npm-exists
+      id: package-exists
       uses: KinsonDigital/PackageMonster@v1.0.0-preview.1
       with:
         package-name: MyPackage 👈🏻 # Required input
         version: 1.2.3 👈🏻 # Required input
-        source: https://registry.npmjs.org/PACKAGE-NAME
-        json-path: $.versions[*].version
+        source: npm
         fail-when-not-found: true 👈🏻 # Optional input
 
     - name: Print Output Result #PowerShell Core
@@ -100,9 +99,9 @@ jobs:
         #        Output name for the Package Monster GitHub action 👇🏼
         #                                               _____|_____
         #                                              |          |
-        $npmExists = "${{ steps.npm-exists.outputs.nuget-exists }}";
+        $packageExists = "${{ steps.package-exists.outputs.package-exists }}";
         
-        if ($nugetExists -eq "true") {
+        if ($packageExists -eq "true") {
           Write-Host "The package exists!!";
         } else {
           Write-Host "The package does not exist!!";
@@ -116,14 +115,14 @@ jobs:
 ## **➡️ Action Inputs ⬅️**
 </div>
 
-| Input Name | Description                                                                           | Required | Default Value |
-|---|:-----------------------------------------------------------------------------------------------|:---:|:---:|
-| `package-name` | The name of the package.                                                    | yes | N/A |
-| `version` | The version of the package.                                                            | yes | N/A |
-| `source` | The source repository to check.                                                         | no | https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json |
-| `json-path` | The json path to extract the versions.                                               | no | $.versions[*] |
-| `fail-when-not-found` | Will fail the job if the package of a specific version is not found. | no | false |
-| `fail-when-found` | Will fail the job if the package of a specific version is found.         | no | false |
+| Input Name            | Description                                                          | Required | Default Value | Notes   |
+|-----------------------|:---------------------------------------------------------------------|:--------:|:-------------:|:-------:|
+| `package-name`        | The name of the package.                                             | yes      | N/A           |         |
+| `version`             | The version of the package.                                          | yes      | N/A           |         |
+| `source`              | The source repository to check.                                      | no       | nuget         | Valid options are: `nuget`, `npm`, or a custom url. If 'PACKAGE-NAME' is in the url, it will be replaced with the value from the `package-name` input parameter. |
+| `json-path`           | The json path to extract the versions.                               | no       | N/A           | Required if `source` is set to a custom url. https://jsonpath.com |
+| `fail-when-found`     | Will fail the job if the package of a specific version is found.     | no       | false         |         |
+| `fail-when-not-found` | Will fail the job if the package of a specific version is not found. | no       | false         |         |
 
 <div align="center">
 
@@ -132,7 +131,7 @@ jobs:
 ## **⬅️ Action Output ➡️**
 </div>
 
-The name of the output is `result` and it returns a `boolean` of `true` or `false`.
+The name of the output is `package-exists` and it returns a `boolean` of `true` or `false`.
 Refer to the **Example** above for how to use the output of the action.
 
 ---

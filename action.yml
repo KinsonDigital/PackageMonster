@@ -12,21 +12,20 @@ inputs:
     description: 'The version of the package to check.  This is not case-sensitive.'
     required: true
   source:
-    description: 'The source repository to check.'
+    description: 'The source repository to check. The string `PACKAGE-NAME` will be replaced with the value from the `package-name` input parameter. Options: [ `nuget`, `npm`, custom url ]'
     required: false
-    default: https://api.nuget.org/v3-flatcontainer/PACKAGE-NAME/index.json
+    default: nuget
   json-path:
-    description: 'The json path to extract the versions.'
+    description: 'The json path to extract the versions. Required only if a custom source url is specified.'
     required: false
-    default: $.versions[*]
   fail-when-not-found:
     description: 'If true, will fail the workflow if the package of the requested version does not exist.'
     required: false
-    default: false
+    default: 'false'
   fail-when-found:
     description: 'If true, will fail the workflow if the package of the requested version does exist.'
     required: false
-    default: false
+    default: 'false'
 
 outputs:
   package-exists:

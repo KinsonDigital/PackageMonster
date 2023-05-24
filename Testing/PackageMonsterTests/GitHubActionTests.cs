@@ -74,7 +74,7 @@ public class GitHubActionTests
         this.mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgEnd));
         this.mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
         this.mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(4));
-        this.mockActionOutputService.VerifyOnce(m => m.SetOutputValue("result", expectedOutput));
+        this.mockActionOutputService.VerifyOnce(m => m.SetOutputValue("package-exists", expectedOutput));
         onCompletedInvoked.Should().BeTrue("the 'onCompleted()' was never invoked");
     }
 
