@@ -120,7 +120,7 @@ jobs:
 | `package-name`        | The name of the package.                                             | yes      | N/A           |         |
 | `version`             | The version of the package.                                          | yes      | N/A           |         |
 | `source`              | The source repository to check.                                      | no       | nuget         | Valid options are: `nuget`, `npm`, or a custom url. If 'PACKAGE-NAME' is in the url, it will be replaced with the value from the `package-name` input parameter. |
-| `json-path`           | The json path to extract the versions.                               | no       | N/A           | Required if `source` is set to a custom url. https://jsonpath.com |
+| `json-path`           | The json path to extract the versions.                               | no       | N/A           | Required if `source` is set to a custom url. Refer to https://jsonpath.com for syntax. |
 | `fail-when-found`     | Will fail the job if the package of a specific version is found.     | no       | false         |         |
 | `fail-when-not-found` | Will fail the job if the package of a specific version is not found. | no       | false         |         |
 
