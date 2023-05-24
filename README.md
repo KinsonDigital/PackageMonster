@@ -1,9 +1,3 @@
-<style>
-code {
-    white-space:nowrap;
-}
-</style>
-
 <div align="center">
     <a href="#"><img align="center" src="https://raw.githubusercontent.com/KinsonDigital/PackageMonster/master/Documentation/Images/pkg-monster-logo.png" height="96"></a>
     <br />
