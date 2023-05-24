@@ -29,7 +29,7 @@
 > - [Defining outputs for jobs](https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs)
 > - [Setting a step action output parameter](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-output-parameter)
 
-<div align="center"><h2 style="font-weight:bold">🪧 Example 🪧</h2></div>
+<div align="center"><h2 style="font-weight:bold">🪧 NuGet Example 🪧</h2></div>
 
 ```yaml
 name: Package Monster Action Sample
@@ -69,7 +69,7 @@ jobs:
 
 ---
 
-<div align="center"><h2 style="font-weight:bold">🪧 Example 🪧</h2></div>
+<div align="center"><h2 style="font-weight:bold">🪧 NPM Example 🪧</h2></div>
 
 ```yaml
 name: Package Monster Action Sample
