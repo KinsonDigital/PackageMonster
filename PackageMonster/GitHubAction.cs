@@ -38,6 +38,16 @@ public sealed class GitHubAction : IGitHubAction
 
         try
         {
+            if (string.IsNullOrWhiteSpace(inputs.PackageName))
+            {
+                throw new ArgumentException("Package name is empty!");
+            }
+
+            if (string.IsNullOrWhiteSpace(inputs.Version))
+            {
+                throw new ArgumentException("Version is empty!");
+            }
+
             this.gitHubConsoleService.Write($"Searching for package '{inputs.PackageName} v{inputs.Version}' . . . ");
             var versions = await this.dataService.GetVersions(inputs.PackageName, inputs.Source, inputs.VersionsJsonPath);
 
@@ -45,7 +55,7 @@ public sealed class GitHubAction : IGitHubAction
                 .Any(version =>
                     string.Equals(version, inputs.Version, StringComparison.CurrentCultureIgnoreCase));
 
-            var searchEndMsg = versionFound ? "package found!!" : "package not found!!";
+            var searchEndMsg = versionFound ? "package found!" : "package not found!";
 
             this.gitHubConsoleService.WriteLine(searchEndMsg);
             this.gitHubConsoleService.BlankLine();
