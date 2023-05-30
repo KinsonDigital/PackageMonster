@@ -11,7 +11,7 @@ using Services;
 public sealed class GitHubAction : IGitHubAction
 {
     private readonly IGitHubConsoleService gitHubConsoleService;
-    private readonly INugetDataService nugetDataService;
+    private readonly IDataService dataService;
     private readonly IActionOutputService actionOutputService;
     private bool isDisposed;
 
@@ -19,15 +19,15 @@ public sealed class GitHubAction : IGitHubAction
     /// Initializes a new instance of the <see cref="GitHubAction"/> class.
     /// </summary>
     /// <param name="gitHubConsoleService">Writes to the console.</param>
-    /// <param name="nugetDataService">Provides access to NuGet data.</param>
+    /// <param name="dataService">Provides access to data.</param>
     /// <param name="actionOutputService">Sets the output data of the action.</param>
     public GitHubAction(
         IGitHubConsoleService gitHubConsoleService,
-        INugetDataService nugetDataService,
+        IDataService dataService,
         IActionOutputService actionOutputService)
     {
         this.gitHubConsoleService = gitHubConsoleService;
-        this.nugetDataService = nugetDataService;
+        this.dataService = dataService;
         this.actionOutputService = actionOutputService;
     }
 
@@ -38,32 +38,49 @@ public sealed class GitHubAction : IGitHubAction
 
         try
         {
+            if (string.IsNullOrWhiteSpace(inputs.PackageName))
+            {
+                throw new ArgumentException("Package name is empty!");
+            }
+
+            if (string.IsNullOrWhiteSpace(inputs.Version))
+            {
+                throw new ArgumentException("Version is empty!");
+            }
+
             this.gitHubConsoleService.Write($"Searching for package '{inputs.PackageName} v{inputs.Version}' . . . ");
-            var versions = await this.nugetDataService.GetNugetVersions(inputs.PackageName);
+            var versions = await this.dataService.GetVersions(inputs.PackageName, inputs.Source, inputs.VersionsJsonPath);
 
             var versionFound = versions
                 .Any(version =>
                     string.Equals(version, inputs.Version, StringComparison.CurrentCultureIgnoreCase));
 
-            var searchEndMsg = versionFound ? "package found!!" : "package not found!!";
+            var searchEndMsg = versionFound ? "package found!" : "package not found!";
 
             this.gitHubConsoleService.WriteLine(searchEndMsg);
             this.gitHubConsoleService.BlankLine();
 
-            this.actionOutputService.SetOutputValue("nuget-exists", versionFound.ToString().ToLower());
+            this.actionOutputService.SetOutputValue("package-exists", versionFound.ToString().ToLower());
 
             var emoji = inputs.FailWhenNotFound is false
                 ? "✅"
                 : string.Empty;
 
-            var foundResultMsg = $"{emoji}The NuGet package '{inputs.PackageName}'";
+            var foundResultMsg = $"{emoji}The package '{inputs.PackageName}'";
             foundResultMsg += $" with the version 'v{inputs.Version}' was{(versionFound ? string.Empty : " not")} found.";
 
             if (versionFound is false)
             {
                 if (inputs.FailWhenNotFound is true)
                 {
-                    throw new NugetNotFoundException(foundResultMsg);
+                    throw new PackageNotFoundException(foundResultMsg);
+                }
+            }
+            else
+            {
+                if (inputs.FailWhenFound is true)
+                {
+                    throw new PackageFoundException(foundResultMsg);
                 }
             }
 
@@ -87,7 +104,7 @@ public sealed class GitHubAction : IGitHubAction
             return;
         }
 
-        this.nugetDataService.Dispose();
+        this.dataService.Dispose();
 
         this.isDisposed = true;
     }

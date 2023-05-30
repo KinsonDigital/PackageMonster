@@ -8,7 +8,7 @@
     <Nullable>enable</Nullable>
 
     <!--Update this for production and preview releases-->
-    <Version>1.0.0-preview.2</Version>
+    <Version>1.0.0-preview.3</Version>
 
     <!--Update this for production and preview releases-->
     <FileVersion>1.0.0-preview.2</FileVersion>
@@ -16,7 +16,7 @@
     <Authors>Calvin Wilkinson</Authors>
     <Company>Kinson Digital</Company>
     <Product>PackageMonster</Product>
-    <Description>Custom GitHub action used to check if nuget.org contains a NuGet package of a particular version.</Description>
+    <Description>Custom GitHub action used to check if a package repository, like nuget.org, contains a package of a particular version.</Description>
     <Copyright>Copyright ©2023 Kinson Digital</Copyright>
   </PropertyGroup>
 
@@ -27,6 +27,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>

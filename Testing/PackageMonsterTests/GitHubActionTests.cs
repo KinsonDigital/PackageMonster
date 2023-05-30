@@ -14,7 +14,7 @@ using PackageMonsterTests.Helpers;
 public class GitHubActionTests
 {
     private readonly Mock<IGitHubConsoleService> mockConsoleService;
-    private readonly Mock<INugetDataService> mockDataService;
+    private readonly Mock<IDataService> mockDataService;
     private readonly Mock<IActionOutputService> mockActionOutputService;
 
     /// <summary>
@@ -23,7 +23,7 @@ public class GitHubActionTests
     public GitHubActionTests()
     {
         this.mockConsoleService = new Mock<IGitHubConsoleService>();
-        this.mockDataService = new Mock<INugetDataService>();
+        this.mockDataService = new Mock<IDataService>();
         this.mockActionOutputService = new Mock<IActionOutputService>();
     }
 
@@ -46,7 +46,7 @@ public class GitHubActionTests
     [InlineData("test-package", "4.5.6", "true")]
     [InlineData("TEST-PACKAGE", "4.5.6", "true")]
     [InlineData("test-package", "7.8.9", "false")]
-    public async void Run_WhenNugetPackageWithVersionExists_SetsOutputToCorrectValue(
+    public async void Run_WhenPackageWithVersionExists_SetsOutputToCorrectValue(
         string packageName,
         string version,
         string expectedOutput)
@@ -55,7 +55,7 @@ public class GitHubActionTests
         var expectedSearchMsgStart = $"Searching for package '{packageName} v{version}' . . . ";
         var expectedSearchMsgEnd = expectedOutput == "true" ? "package found!!" : "package not found!!";
 
-        this.mockDataService.Setup(m => m.GetNugetVersions(packageName))
+        this.mockDataService.Setup(m => m.GetVersions(packageName, It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(new[] { "1.2.3", "4.5.6" });
         var onCompletedInvoked = false;
 
@@ -67,14 +67,14 @@ public class GitHubActionTests
 
         // Assert
         await act.Should().NotThrowAsync();
-        var expectedResultMsg = $"✅The NuGet package '{packageName}'";
+        var expectedResultMsg = $"✅The package '{packageName}'";
         expectedResultMsg += $" with the version 'v{version}' was{(expectedOutput == "false" ? " not" : string.Empty)} found.";
 
         this.mockConsoleService.VerifyOnce(m => m.Write(expectedSearchMsgStart, false));
         this.mockConsoleService.VerifyOnce(m => m.WriteLine(expectedSearchMsgEnd));
         this.mockConsoleService.VerifyOnce(m => m.WriteLine(expectedResultMsg));
         this.mockConsoleService.Verify(m => m.BlankLine(), Times.Exactly(4));
-        this.mockActionOutputService.VerifyOnce(m => m.SetOutputValue("nuget-exists", expectedOutput));
+        this.mockActionOutputService.VerifyOnce(m => m.SetOutputValue("package-exists", expectedOutput));
         onCompletedInvoked.Should().BeTrue("the 'onCompleted()' was never invoked");
     }
 
@@ -84,7 +84,7 @@ public class GitHubActionTests
         // Arrange
         var inputs = CreateInputs(failWhenNotFound: true);
 
-        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(Array.Empty<string>());
 
         var action = CreateAction();
@@ -94,8 +94,8 @@ public class GitHubActionTests
 
         // Assert
         await act.Should()
-            .ThrowAsync<NugetNotFoundException>()
-            .WithMessage($"The NuGet package '{inputs.PackageName}' with the version 'v{inputs.Version}' was not found.");
+            .ThrowAsync<PackageNotFoundException>()
+            .WithMessage($"The package '{inputs.PackageName}' with the version 'v{inputs.Version}' was not found.");
     }
 
     [Theory]
@@ -106,7 +106,7 @@ public class GitHubActionTests
         // Arrange
         var inputs = CreateInputs(failWhenNotFound: failWhenNotFound);
 
-        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
+        this.mockDataService.Setup(m => m.GetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(Array.Empty<string>());
 
         var action = CreateAction();
@@ -116,15 +116,15 @@ public class GitHubActionTests
 
         // Assert
         await act.Should()
-            .NotThrowAsync<NugetNotFoundException>();
+            .NotThrowAsync<PackageNotFoundException>();
     }
 
     [Fact]
     public async void Run_WhenAnExceptionIsThrown_InvokesOnErrorActionParam()
     {
         // Arrange
-        this.mockDataService.Setup(m => m.GetNugetVersions(It.IsAny<string>()))
-            .Callback<string>(_ => throw new Exception("test-exception"));
+        this.mockDataService.Setup(m => m.GetVersions(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            .Callback<string, string, string>((_, _, _) => throw new Exception("test-exception"));
         Exception? exception = null;
 
         var inputs = CreateInputs();
@@ -160,11 +160,13 @@ public class GitHubActionTests
     private static ActionInputs CreateInputs(
         string packageName = "test-package",
         string version = "1.2.3",
-        bool? failWhenNotFound = true) => new ()
+        bool? failWhenNotFound = true,
+        bool? failWhenFound = false) => new ()
     {
         PackageName = packageName,
         Version = version,
         FailWhenNotFound = failWhenNotFound,
+        FailWhenFound = failWhenFound
     };
 
     /// <summary>

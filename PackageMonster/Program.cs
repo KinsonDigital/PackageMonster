@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Diagnostics.CodeAnalysis;
+using System.IO.Abstractions;
 using PackageMonster.Services;
 
 namespace PackageMonster;
@@ -27,9 +28,12 @@ public static class Program
             {
                 services.AddSingleton<IAppService, AppService>();
                 services.AddSingleton<IGitHubConsoleService, GitHubConsoleService>();
+                services.AddSingleton<IEnvVarService, EnvVarService>();
                 services.AddSingleton<IActionOutputService, ActionOutputService>();
+                services.AddSingleton<IFile, FileWrapper>();
+                services.AddSingleton<IFileSystem, FileSystem>();
                 services.AddSingleton<IArgParsingService<ActionInputs>, ArgParsingService>();
-                services.AddSingleton<INugetDataService, NugetDataService>();
+                services.AddSingleton<IDataService, DataService>();
                 services.AddSingleton<IGitHubAction, GitHubAction>();
             }).Build();
 

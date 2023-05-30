@@ -1,4 +1,4 @@
-﻿// <copyright file="NugetNotFoundExceptionTests.cs" company="KinsonDigital">
+﻿// <copyright file="PackageNotFoundExceptionTests.cs" company="KinsonDigital">
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
@@ -8,19 +8,19 @@ using FluentAssertions;
 using PackageMonster.Exceptions;
 
 /// <summary>
-/// Tests the <see cref="NugetNotFoundException"/> class.
+/// Tests the <see cref="PackageNotFoundException"/> class.
 /// </summary>
-public class NugetNotFoundExceptionTests
+public class PackageNotFoundExceptionTests
 {
     #region Constructor Tests
     [Fact]
     public void Ctor_WithNoParam_CorrectlySetsExceptionMessage()
     {
         // Act
-        var exception = new NugetNotFoundException();
+        var exception = new PackageNotFoundException();
 
         // Assert
-        exception.Message.Should().Be("The NuGet package was not found.");
+        exception.Message.Should().Be("The package was not found.");
         exception.HResult.Should().Be(60);
     }
 
@@ -28,7 +28,7 @@ public class NugetNotFoundExceptionTests
     public void Ctor_WhenInvokedWithSingleMessageParam_CorrectlySetsMessage()
     {
         // Act
-        var exception = new NugetNotFoundException("test-message");
+        var exception = new PackageNotFoundException("test-message");
 
         // Assert
         exception.Message.Should().Be("test-message");
@@ -42,7 +42,7 @@ public class NugetNotFoundExceptionTests
         var innerException = new Exception("inner-exception");
 
         // Act
-        var deviceException = new NugetNotFoundException("test-exception", innerException);
+        var deviceException = new PackageNotFoundException("test-exception", innerException);
 
         // Assert
         deviceException.InnerException.Message.Should().Be("inner-exception");

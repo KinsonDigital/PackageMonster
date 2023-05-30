@@ -1,5 +1,5 @@
 name: 'PackageMonster'
-description: 'Checks if a NuGet package exists in the nuget.org public repository.'
+description: 'Checks if a package exists in the a public repository.'
 author: 'Calvin Wilkinson (KinsonDigital)'
 branding:
   icon: settings
@@ -9,16 +9,27 @@ inputs:
     description: 'The name of the package.  This is not case-sensitive.'
     required: true
   version:
-    description: 'The version of the NuGet package to check.  This is not case-sensitive.'
+    description: 'The version of the package to check.  This is not case-sensitive.'
     required: true
-  fail-when-not-found:
-    description: 'If true, will fail the workflow if the NuGet package of the requested version does not exist.'
+  source:
+    description: 'The source repository to check. The string `PACKAGE-NAME` will be replaced with the value from the `package-name` input parameter. Options: [ `nuget`, `npm`, custom url ]'
     required: false
-    default: false
+    default: nuget
+  json-path:
+    description: 'The json path to extract the versions. Required only if a custom source url is specified.'
+    required: false
+  fail-when-not-found:
+    description: 'If true, will fail the workflow if the package of the requested version does not exist.'
+    required: false
+    default: 'false'
+  fail-when-found:
+    description: 'If true, will fail the workflow if the package of the requested version does exist.'
+    required: false
+    default: 'false'
 
 outputs:
-  nuget-exists:
-    description: 'True if the NuGet package exists.'
+  package-exists:
+    description: 'True if the package exists.'
 
 # These are the arguments that are passed into the console app
 runs:
@@ -29,5 +40,11 @@ runs:
   - ${{ inputs.package-name }}
   - '--version'
   - ${{ inputs.version }}
+  - '--source'
+  - ${{ inputs.source }}
+  - '--json-path'
+  - ${{ inputs.json-path }}
   - '--fail-when-not-found'
   - ${{ inputs.fail-when-not-found }}
+  - '--fail-when-found'
+  - ${{ inputs.fail-when-found }}

@@ -2,6 +2,8 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+using PackageMonster.Services;
+
 namespace PackageMonster;
 
 /// <summary>
@@ -19,7 +21,7 @@ public class ActionInputs
     public string PackageName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the NuGet package version to check.
+    /// Gets or sets the package version to check.
     /// </summary>
     /// <remarks>
     /// Version search is not case-sensitive.
@@ -27,8 +29,26 @@ public class ActionInputs
     [Option(
         "version",
         Required = true,
-        HelpText = "The version of the NuGet package to check.  This is not case-sensitive.")]
+        HelpText = "The version of the package to check.  This is not case-sensitive.")]
     public string Version { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the repository.
+    /// </summary>
+    [Option(
+        "source",
+        Required = false,
+        HelpText = "The source repository to check.  Defaults to `nuget`.")]
+    public string Source { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the json path to extract the versions.
+    /// </summary>
+    [Option(
+        "json-path",
+        Required = false,
+        HelpText = "The json path to the versions.")]
+    public string VersionsJsonPath { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets a value indicating whether or not the action will fail if the package was not found.
@@ -37,6 +57,16 @@ public class ActionInputs
         "fail-when-not-found",
         Required = false,
         Default = false,
-        HelpText = "If true, will fail the workflow if the NuGet package of the requested version does not exist.")]
+        HelpText = "If true, will fail the workflow if the package of the requested version does not exist.")]
     public bool? FailWhenNotFound { get; set; }
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether or not the action will fail if the package was found.
+    /// </summary>
+    [Option(
+        "fail-when-found",
+        Required = false,
+        Default = false,
+        HelpText = "If true, will fail the workflow if the package of the requested version does exist.")]
+    public bool? FailWhenFound { get; set; }
 }

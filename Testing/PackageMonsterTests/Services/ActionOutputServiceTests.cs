@@ -15,6 +15,7 @@ public class ActionOutputServiceTests
 {
     private readonly Mock<IEnvVarService> mockEnvVarService;
     private readonly Mock<IFile> mockFile;
+    private readonly Mock<IGitHubConsoleService> mockConsoleService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ActionOutputServiceTests"/> class.
@@ -23,6 +24,7 @@ public class ActionOutputServiceTests
     {
         this.mockEnvVarService = new Mock<IEnvVarService>();
         this.mockFile = new Mock<IFile>();
+        this.mockConsoleService = new Mock<IGitHubConsoleService>();
     }
 
     #region Constructor Tests
@@ -32,7 +34,7 @@ public class ActionOutputServiceTests
         // Arrange & Act
         var act = () =>
         {
-            _ = new ActionOutputService(null, Mock.Of<IFile>());
+            _ = new ActionOutputService(null, Mock.Of<IFile>(), Mock.Of<IGitHubConsoleService>());
         };
 
         // Assert
@@ -47,13 +49,28 @@ public class ActionOutputServiceTests
         // Arrange & Act
         var act = () =>
         {
-            _ = new ActionOutputService(Mock.Of<IEnvVarService>(), null);
+            _ = new ActionOutputService(Mock.Of<IEnvVarService>(), null, null);
         };
 
         // Assert
         act.Should()
             .Throw<ArgumentNullException>()
             .WithMessage("The parameter must not be null. (Parameter 'file')");
+    }
+
+    [Fact]
+    public void Ctor_WithConsoleServiceParam_ThrowsException()
+    {
+        // Arrange & Act
+        var act = () =>
+        {
+            _ = new ActionOutputService(Mock.Of<IEnvVarService>(), Mock.Of<IFile>(), null);
+        };
+
+        // Assert
+        act.Should()
+            .Throw<ArgumentNullException>()
+            .WithMessage("The parameter must not be null. (Parameter 'consoleService')");
     }
     #endregion
 
@@ -76,6 +93,23 @@ public class ActionOutputServiceTests
     }
 
     [Fact]
+    public void SetOutputValue_WhenOutputPathNotSpecified_LogWarning()
+    {
+        // Arrange
+        const string outputPath = "";
+        this.mockEnvVarService
+            .Setup(m => m.GetEnvironmentVariable(It.IsAny<string>(), It.IsAny<EnvironmentVariableTarget>()))
+            .Returns(outputPath);
+        var sut = CreateSystemUnderTest();
+
+        // Act
+        sut.SetOutputValue("test-output", "test-value");
+
+        // Assert
+        this.mockConsoleService.VerifyOnce(m => m.WriteLine("WARNING: The environment variable 'GITHUB_OUTPUT' was not specified."));
+    }
+
+    [Fact]
     public void SetOutputValue_WhenOutputPathDoesNotExist_ThrowsException()
     {
         // Arrange
@@ -91,18 +125,16 @@ public class ActionOutputServiceTests
 
         // Assert
         act.Should().Throw<FileNotFoundException>()
-            .WithMessage("The GitHub output environment file was not found.");
+            .WithMessage("The GitHub output file was not found.");
     }
 
     [Fact]
     public void SetOutputValue_WhenInvoked_SetsOutputValue()
     {
         // Arrange
-        var expected =
-            $"""
-            other-output=other-value
-            test-output=test-value{Environment.NewLine}
-            """;
+        var expected = @"other-output=other-value
+test-output=test-value
+".ReplaceLineEndings(Environment.NewLine);
 
         const string outputPath = "test-path";
         var lines = new[]
@@ -134,5 +166,5 @@ public class ActionOutputServiceTests
     /// </summary>
     /// <returns>The instance to test.</returns>
     private ActionOutputService CreateSystemUnderTest() =>
-        new (this.mockEnvVarService.Object, this.mockFile.Object);
+        new (this.mockEnvVarService.Object, this.mockFile.Object, this.mockConsoleService.Object);
 }
