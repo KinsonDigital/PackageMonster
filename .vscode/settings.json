@@ -3,5 +3,6 @@
     "cSpell.words": [
         "cicd",
         "endgroup"
-    ]
+    ],
+    "dotnet.defaultSolution": "PackageMonster.sln"
 }
