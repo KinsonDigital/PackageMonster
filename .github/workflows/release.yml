@@ -29,13 +29,13 @@ on:
         required: false
         description: If true, the release will not be created.
         default: false
-        type: boolean          
+        type: boolean
 
 
 jobs:
   perform_release:
     name: Performing ${{ inputs.release-type }} Release of ${{ vars.PROJECT_NAME }} (${{ inputs.release-type == 'Production' && 'Release' || 'Debug' }})
-    uses: KinsonDigital/Infrastructure/.github/workflows/dotnet-action-release.yml@v8.1.0
+    uses: KinsonDigital/Infrastructure/.github/workflows/reusable/dotnet-action-release.yml@v9.0.0
     with:
       project-name: "${{ vars.PROJECT_NAME }}"
       release-type: "${{ inputs.release-type }}"
