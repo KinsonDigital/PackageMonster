@@ -1,7 +1,24 @@
 {
-    "deno.enable": true,
     "cSpell.words": [
         "cicd",
         "endgroup"
-    ]
+    ],
+    "dotnet.defaultSolution": "PackageMonster.sln",
+    "[typescript]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4,
+    },
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+	},
+	"[jsonc]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4,
+	},
+	"editor.detectIndentation": false,
+	"[github-actions-workflow]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true
+	},
 }
