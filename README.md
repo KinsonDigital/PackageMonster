@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="#"><img align="center" src="https://raw.githubusercontent.com/KinsonDigital/PackageMonster/master/Documentation/Images/pkg-monster-logo.png" height="96"></a>
+    <a href="#"><img align="center" src="https://raw.githubusercontent.com/KinsonDigital/PackageMonster/main/Documentation/Images/pkg-monster-logo.png" height="96"></a>
     <br />
 
 </div>
@@ -112,7 +112,7 @@ Interested in contributing? If so, click [here](https://github.com/KinsonDigital
 <div align="center">
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat)](https://github.com/KinsonDigital/.github/blob/master/docs/code_of_conduct.md)
-[![MIT License](https://img.shields.io/github/license/kinsondigital/packagemonster)](https://github.com/KinsonDigital/PackageMonster/blob/master/LICENSE.md)
+[![MIT License](https://img.shields.io/github/license/kinsondigital/packagemonster)](https://github.com/KinsonDigital/PackageMonster/blob/main/LICENSE.md)
 </div>
 
 This software is distributed under the very permissive MIT license and all dependencies are distributed under MIT-compatible licenses.
