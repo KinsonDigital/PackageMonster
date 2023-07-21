@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile = Dockerfile
 		README.md = README.md
 		LICENSE.md = LICENSE.md
+		renovate.json = renovate.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackageMonsterTests", "Testing\PackageMonsterTests\PackageMonsterTests.csproj", "{77B96B49-4D77-456B-A787-E852E9842B60}"
@@ -26,8 +27,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{0D64
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{5010ECCD-3BCC-475D-87EE-31E289E24571}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\add-new-issue-to-project.yml = .github\workflows\add-new-issue-to-project.yml
 		.github\workflows\build-status-check.yml = .github\workflows\build-status-check.yml
-		.github\workflows\unit-tests-status-check.yml = .github\workflows\unit-tests-status-check.yml
+		.github\workflows\prepare-release.yml = .github\workflows\prepare-release.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+		.github\workflows\sync-bot.yml = .github\workflows\sync-bot.yml
+		.github\workflows\sync-issue-to-pr.yml = .github\workflows\sync-issue-to-pr.yml
+		.github\workflows\sync-status-check.yml = .github\workflows\sync-status-check.yml
+		.github\workflows\unit-test-status-check.yml = .github\workflows\unit-test-status-check.yml
 	EndProjectSection
 EndProject
 Global

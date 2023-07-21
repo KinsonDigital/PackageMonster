@@ -1,10 +1,11 @@
 {
     "cSpell.words": [
-        "cicd",
-        "endgroup"
-    ],
+		"cicd",
+		"endgroup",
+		"Kinson"
+	],
     "dotnet.defaultSolution": "PackageMonster.sln",
-    "[typescript]": {
+    "[csharp]": {
 		"editor.insertSpaces": false,
 		"editor.tabSize": 4,
     },
