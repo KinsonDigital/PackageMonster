@@ -1,7 +1,6 @@
 <div align="center">
-    <a href="#"><img align="center" src="https://raw.githubusercontent.com/KinsonDigital/PackageMonster/main/Documentation/Images/pkg-monster-logo.png" height="96"></a>
-    <br />
-
+    
+![logo](https://raw.githubusercontent.com/KinsonDigital/PackageMonster/preview/Images/pkg-monster-logo.png)
 </div>
 
 <h1 align="center">
