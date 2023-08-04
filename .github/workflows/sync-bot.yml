@@ -37,14 +37,16 @@ jobs:
           }
 
           <# Deno Args:
-            1. Project Name
-            2. Issue Number
-            3. Event Type - set to issue event type
-            4. GitHub token
+            1. Organization name
+            2. Project name
+            3. Issue number
+            4. Event type - set to issue event type
+            5. PAT
           #>
           deno run `
             --allow-net `
             "$scriptUrl" `
+            "${{ vars.ORGANIZATION_NAME }}" `
             "${{ vars.PROJECT_NAME }}" `
             "$issueNumber" `
             "issue" `
