@@ -1,7 +1,6 @@
 <div align="center">
-    <a href="#"><img align="center" src="https://raw.githubusercontent.com/KinsonDigital/PackageMonster/master/Documentation/Images/pkg-monster-logo.png" height="96"></a>
-    <br />
-
+    
+![logo](https://raw.githubusercontent.com/KinsonDigital/PackageMonster/preview/Images/pkg-monster-logo.png)
 </div>
 
 <h1 align="center">
@@ -10,6 +9,9 @@
 </h1>
 
 <div align="center">
+
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/kinsondigital/PackageMonster/build-status-check.yml?style=flat&label=%F0%9F%94%A7Build&color=2f8840)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/kinsondigital/PackageMonster/unit-test-status-check.yml?style=flat&label=%F0%9F%A7%AATests&color=2f8840)
 
 [![Good First GitHub Issues](https://img.shields.io/github/issues/kinsondigital/PackageMonster/good%20first%20issue?color=7057ff&label=Good%20First%20Issues)](https://github.com/KinsonDigital/PackageMonster/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 [![Discord](https://img.shields.io/discord/481597721199902720?color=%23575CCB&label=chat%20on%20discord&logo=discord&logoColor=white)](https://discord.gg/qewu6fNgv7)
@@ -38,7 +40,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Test_Action:em
+  test_action:
     name: Test Package Monster GitHub Action
     runs-on: ubuntu-latest 👈🏼 # Required (Refer to the note above)
     steps:
@@ -46,7 +48,7 @@ jobs:
 
     - name: Check If Nuget Package Exists
       id: nuget-exists
-      uses: KinsonDigital/PackageMonster@v1.0.0-preview.1
+      uses: JohnDoe/MyProject@v1.0.0-preview.1
       with:
         package-name: MyPackage 👈🏻 # Required input
         version: 1.2.3 👈🏻 # Required input
@@ -59,11 +61,12 @@ jobs:
         #                                               _____|_____
         #                                              |          |
         $nugetExists = "${{ steps.nuget-exists.outputs.nuget-exists }}";
-        
+
         if ($nugetExists -eq "true") {
-          Write-Host "The NuGet package exists!!";
+          Write-Host "::notice::The NuGet package exists!!";
         } else {
-          Write-Host "The NuGet package does not exist!!";
+          Write-Host "::error::The NuGet package does not exist!!";
+          exit 1;
         }
 ```
 
@@ -112,7 +115,7 @@ Interested in contributing? If so, click [here](https://github.com/KinsonDigital
 <div align="center">
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat)](https://github.com/KinsonDigital/.github/blob/master/docs/code_of_conduct.md)
-[![MIT License](https://img.shields.io/github/license/kinsondigital/packagemonster)](https://github.com/KinsonDigital/PackageMonster/blob/master/LICENSE.md)
+[![MIT License](https://img.shields.io/github/license/kinsondigital/packagemonster)](https://github.com/KinsonDigital/PackageMonster/blob/main/LICENSE.md)
 </div>
 
 This software is distributed under the very permissive MIT license and all dependencies are distributed under MIT-compatible licenses.
