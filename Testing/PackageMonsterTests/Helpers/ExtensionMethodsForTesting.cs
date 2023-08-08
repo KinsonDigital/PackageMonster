@@ -5,8 +5,7 @@
 namespace PackageMonsterTests.Helpers;
 
 using System.Reflection;
-using CommandLine;
-using Xunit.Sdk;
+using FluentAssertions.Execution;
 
 /// <summary>
 /// Provides extension/helper methods to assist in unit testing.
@@ -21,7 +20,7 @@ public static class ExtensionMethodsForTesting
     /// <param name="propName">The name of the property on the object.</param>
     /// <typeparam name="T">The type of attribute on the property.</typeparam>
     /// <returns>The existing attribute.</returns>
-    /// <exception cref="AssertActualExpectedException">
+    /// <exception cref="AssertionFailedException">
     ///     Thrown if the property or attribute does not exist.
     /// </exception>
     public static T GetAttrFromProp<T>(this object value, string propName)
@@ -34,10 +33,8 @@ public static class ExtensionMethodsForTesting
 
         if (props.Length <= 0)
         {
-            throw new AssertActualExpectedException(
-                "at least 1 item.",
-                "was 0 items.",
-                noPropsAssertMsg);
+            var exceptionMsg = $"{noPropsAssertMsg}\nExpected: at least 1 item.\nActual: was 0 items.";
+            throw new AssertionFailedException(exceptionMsg);
         }
 
         var propNotFoundAssertMsg = $"Cannot get an attribute on the property '{propName}' if the property does not exist.";
@@ -47,10 +44,8 @@ public static class ExtensionMethodsForTesting
 
         if (foundProp is null)
         {
-            throw new AssertActualExpectedException(
-                "not to be null.",
-                "was null",
-                propNotFoundAssertMsg);
+            var exceptionMsg = $"{propNotFoundAssertMsg}\nExpected: not to be null.\nActual: was null.";
+            throw new AssertionFailedException(exceptionMsg);
         }
 
         var noAttrsAssertMsg = $"Cannot get an attribute when the property '{propName}' does not have any attributes.";
@@ -58,113 +53,10 @@ public static class ExtensionMethodsForTesting
 
         if (attrs.Length <= 0)
         {
-            throw new AssertActualExpectedException(
-                "at least 1 item.",
-                "was 0 items.",
-                noAttrsAssertMsg);
+            var exceptionMsg = $"{noAttrsAssertMsg}\nExpected: at least 1 item.\nActual: was 0 items.";
+            throw new AssertionFailedException(exceptionMsg);
         }
 
         return attrs[0];
-    }
-
-    /// <summary>
-    /// Asserts the properties below.
-    /// <list type="bullet">
-    ///     <item><see cref="OptionAttribute"/>.<see cref="OptionAttribute.LongName"/></item>
-    ///     <item><see cref="OptionAttribute"/>.<see cref="BaseAttribute.Required"/></item>
-    ///     <item><see cref="OptionAttribute"/>.<see cref="BaseAttribute.Default"/></item>
-    ///     <item><see cref="OptionAttribute"/>.<see cref="BaseAttribute.HelpText"/></item>
-    /// </list>
-    /// </summary>
-    /// <param name="value">The attribute to assert.</param>
-    /// <param name="longNameExpected">The expected value of the <see cref="OptionAttribute.LongName"/> property.</param>
-    /// <param name="requiredExpected">The expected value of the <see cref="OptionAttribute.Required"/> property.</param>
-    /// <param name="defaultExpected">The expected value of the <see cref="BaseAttribute.Default"/> property.</param>
-    /// <param name="helpTextExpected">The expected value of the <see cref="OptionAttribute.HelpText"/> property.</param>
-    /// <exception cref="AssertActualExpectedException">
-    ///     Thrown if the properties do not have the correct values.
-    /// </exception>
-    public static void AssertOptionAttrProps(this OptionAttribute value,
-        string longNameExpected,
-        bool requiredExpected,
-        object defaultExpected,
-        string helpTextExpected)
-    {
-        if (value.LongName != longNameExpected)
-        {
-            throw new AssertActualExpectedException(
-                longNameExpected,
-                value.LongName,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.LongName)}' property value is not correct for option '{longNameExpected}'.");
-        }
-
-        if (value.Required != requiredExpected)
-        {
-            throw new AssertActualExpectedException(
-                requiredExpected,
-                value.Required,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.Required)}' property value is not correct for option '{longNameExpected}'.");
-        }
-
-        if (value.Default.ToString() != defaultExpected.ToString())
-        {
-            throw new AssertActualExpectedException(
-                defaultExpected,
-                value.Default,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.Default)}' property value is not correct for option '{defaultExpected}'.");
-        }
-
-        if (value.HelpText != helpTextExpected)
-        {
-            throw new AssertActualExpectedException(
-                helpTextExpected,
-                value.HelpText,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.HelpText)}' property value is not correct for option '{longNameExpected}'.");
-        }
-    }
-
-    /// <summary>
-    /// Asserts the properties below.
-    /// <list type="bullet">
-    ///     <item><see cref="OptionAttribute"/>.<see cref="OptionAttribute.LongName"/></item>
-    ///     <item><see cref="OptionAttribute"/>.<see cref="BaseAttribute.Required"/></item>
-    ///     <item><see cref="OptionAttribute"/>.<see cref="BaseAttribute.HelpText"/></item>
-    /// </list>
-    /// </summary>
-    /// <param name="value">The attribute to assert.</param>
-    /// <param name="longNameExpected">The expected value of the <see cref="OptionAttribute.LongName"/> property.</param>
-    /// <param name="requiredExpected">The expected value of the <see cref="OptionAttribute.Required"/> property.</param>
-    /// <param name="helpTextExpected">The expected value of the <see cref="OptionAttribute.HelpText"/> property.</param>
-    /// <exception cref="AssertActualExpectedException">
-    ///     Thrown if the properties do not have the correct values.
-    /// </exception>
-    public static void AssertOptionAttrProps(this OptionAttribute value,
-        string longNameExpected,
-        bool requiredExpected,
-        string helpTextExpected)
-    {
-        if (value.LongName != longNameExpected)
-        {
-            throw new AssertActualExpectedException(
-                longNameExpected,
-                value.LongName,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.LongName)}' property value is not correct.");
-        }
-
-        if (value.Required != requiredExpected)
-        {
-            throw new AssertActualExpectedException(
-                requiredExpected,
-                value.Required,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.Required)}' property value is not correct for option '{longNameExpected}'.");
-        }
-
-        if (value.HelpText != helpTextExpected)
-        {
-            throw new AssertActualExpectedException(
-                helpTextExpected,
-                value.HelpText,
-                $"The '{nameof(OptionAttribute)}.{nameof(OptionAttribute.HelpText)}' property value is not correct.");
-        }
     }
 }
