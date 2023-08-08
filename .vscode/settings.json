@@ -1,7 +1,25 @@
 {
-    "deno.enable": true,
     "cSpell.words": [
-        "cicd",
-        "endgroup"
-    ]
+		"cicd",
+		"endgroup",
+		"Kinson"
+	],
+    "dotnet.defaultSolution": "PackageMonster.sln",
+    "[csharp]": {
+		"editor.insertSpaces": true,
+		"editor.indentSize": 4,
+    },
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.indentSize": 2,
+	},
+	"[jsonc]": {
+		"editor.insertSpaces": false,
+		"editor.indentSize": 4,
+	},
+	"editor.detectIndentation": false,
+	"[github-actions-workflow]": {
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true
+	},
 }

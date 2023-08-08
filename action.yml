@@ -1,8 +1,8 @@
-name: 'PackageMonster'
+name: 'Package Monster'
 description: 'Checks if a NuGet package exists in the nuget.org public repository.'
 author: 'Calvin Wilkinson (KinsonDigital)'
 branding:
-  icon: settings
+  icon: package
   color: purple
 inputs:
   package-name:
